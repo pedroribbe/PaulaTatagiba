@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Projetos | Tatagiba Arquitetura</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary": "#74594a",
+          "on-surface-variant": "#5b605f",
+          "on-primary": "#f1fbeb",
+          "primary": "#586155",
+          "primary-dim": "#4c554a",
+          "on-surface": "#2f3333",
+          "outline-variant": "#afb3b2",
+          "outline": "#777c7b",
+          "background": "#faf9f8",
+          "surface-container": "#edeeed",
+          "surface": "#faf9f8",
+          "on-background": "#2f3333",
+        },
+        fontFamily: {
+          "headline": ["Manrope"],
+          "body": ["Work Sans"],
+          "label": ["Work Sans"]
+        },
+        borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  body { overflow-x: hidden; }
+  .project-card:hover .project-overlay { opacity: 1; }
+  .project-card {
+    transition: opacity 0.35s ease, transform 0.35s ease;
+  }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased">
+
+<!-- Nav -->
+<nav class="bg-[#F7F6F5] sticky top-0 z-50 transition-colors duration-500 border-b border-outline-variant/10">
+  <div class="flex justify-between items-center w-full px-4 sm:px-8 py-5 max-w-screen-2xl mx-auto">
+    <a href="index.html" class="font-headline font-light text-base md:text-lg tracking-[0.2em] uppercase text-on-surface whitespace-nowrap">
+      Tatagiba Arquitetura
+    </a>
+    <div class="hidden md:flex items-center space-x-12">
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-tertiary transition-all duration-300" href="index.html">Home</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-tertiary transition-all duration-300" href="sobre.html">Sobre</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-tertiary border-b border-tertiary pb-1" href="projetos.html">Projetos</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-tertiary transition-all duration-300" href="contato.html">Contato</a>
+    </div>
+    <button id="menu-btn" class="md:hidden text-primary">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-[#F7F6F5] border-t border-outline-variant/10 px-4 sm:px-8 py-6 flex flex-col gap-6">
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="index.html">Home</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="sobre.html">Sobre</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-tertiary" href="projetos.html">Projetos</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="contato.html">Contato</a>
+  </div>
+</nav>
+
+<main class="max-w-screen-2xl mx-auto px-4 sm:px-8 pt-12 md:pt-20 pb-16 md:pb-32">
+
+  <!-- Header -->
+  <header class="mb-12 md:mb-24 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+    <div class="max-w-2xl">
+      <h1 class="text-4xl sm:text-6xl md:text-8xl font-headline font-bold text-on-surface tracking-tighter leading-none mb-4 md:mb-6">
+        Projetos
+      </h1>
+      <p class="text-base md:text-xl text-on-surface-variant font-light leading-relaxed">
+        Uma curadoria de espaços que equilibram a brutalidade da forma com a delicadeza do viver.
+      </p>
+    </div>
+    <!-- Filters -->
+    <div class="flex flex-wrap gap-4 md:gap-6 border-b border-outline-variant/20 pb-4" id="filters">
+      <button data-filter="all" class="filter-btn font-headline font-semibold text-xs tracking-[0.2em] uppercase text-primary border-b-2 border-primary pb-2">Todos</button>
+      <button data-filter="residencial" class="filter-btn font-headline font-semibold text-xs tracking-[0.2em] uppercase text-on-surface-variant hover:text-primary transition-colors pb-2">Residencial</button>
+      <button data-filter="comercial" class="filter-btn font-headline font-semibold text-xs tracking-[0.2em] uppercase text-on-surface-variant hover:text-primary transition-colors pb-2">Comercial</button>
+      <button data-filter="infantil" class="filter-btn font-headline font-semibold text-xs tracking-[0.2em] uppercase text-on-surface-variant hover:text-primary transition-colors pb-2">Infantil</button>
+    </div>
+  </header>
+
+  <!-- Grid -->
+  <section class="grid grid-cols-1 md:grid-cols-6 gap-4 sm:gap-6 md:gap-12" id="projects-grid"></section>
+
+  <!-- CTA -->
+  <section class="mt-20 md:mt-40 mb-10 md:mb-20 flex flex-col items-center text-center">
+    <h2 class="font-headline text-2xl sm:text-3xl md:text-5xl font-bold tracking-tight mb-6 md:mb-8">Interessado em um projeto autoral?</h2>
+    <a href="contato.html" class="inline-block bg-primary hover:bg-primary-dim text-on-primary px-8 sm:px-12 py-4 font-headline font-semibold uppercase tracking-[0.2em] text-xs sm:text-sm transition-all duration-300">
+      Iniciar Conversa
+    </a>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#677064] text-[#faf9f8] border-t border-[#a4a693]/20 py-12 md:py-16 px-4 sm:px-6">
+  <div class="max-w-screen-2xl w-full flex flex-col items-center mx-auto text-center">
+    <div class="text-lg sm:text-2xl font-light tracking-[0.4em] text-white mb-6 md:mb-8 font-headline">Tatagiba Arquitetura</div>
+    <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 md:mb-12">
+      <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="index.html">Home</a>
+      <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="sobre.html">Sobre</a>
+      <a class="font-body tracking-[0.15em] text-xs uppercase text-white font-bold" href="projetos.html">Projetos</a>
+      <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="contato.html">Contato</a>
+    </div>
+    <div class="w-24 h-px bg-white/20 mb-6 md:mb-8"></div>
+    <p class="font-body tracking-[0.15em] text-[10px] uppercase text-[#ced7c9] opacity-60">
+      © 2025 Tatagiba Arquitetura. Todos os direitos reservados.
+    </p>
+  </div>
+</footer>
+
+<div id="page-overlay" style="position:fixed;inset:0;background:#faf9f8;z-index:9999;opacity:1;pointer-events:none;transition:opacity 0.45s ease;"></div>
+
+<script>
+  document.getElementById('menu-btn').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+
+  // Page transition
+  const overlay = document.getElementById('page-overlay');
+  requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('tel') && !href.startsWith('mailto')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
+        setTimeout(() => { window.location.href = href; }, 420);
+      });
+    }
+  });
+
+  // Layout editorial por posição
+  const layouts = [
+    { cols: 'md:col-span-4', aspect: 'aspect-[16/10]',                extra: '' },
+    { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[4/5]',  extra: 'md:mt-24' },
+    { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]',  extra: '' },
+    { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]',  extra: 'md:-mt-12' },
+    { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]',  extra: '' },
+    { cols: 'md:col-span-6', aspect: 'aspect-[16/9] md:aspect-[21/9]', extra: 'mt-2 md:mt-8' },
+    { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: '' },
+    { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: '' },
+  ];
+  const extraLayouts = [
+    { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]',  extra: 'mt-2 md:mt-8' },
+    { cols: 'md:col-span-4', aspect: 'aspect-[16/10]',                extra: 'mt-2 md:mt-8' },
+    { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: 'mt-2' },
+    { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: 'mt-2' },
+  ];
+  const catLabel = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
+
+  function getLayout(i) {
+    return i < layouts.length ? layouts[i] : extraLayouts[(i - layouts.length) % extraLayouts.length];
+  }
+
+  function buildCard(p, i) {
+    const l = getLayout(i);
+    return `<div class="${l.cols} ${l.extra} project-card relative cursor-pointer overflow-hidden ${l.aspect}" data-category="${p.category}">
+      <img alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="${p.image}"/>
+      <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
+        <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${catLabel[p.category] || p.category}</span>
+        <h3 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${p.name}</h3>
+      </div>
+    </div>`;
+  }
+
+  // Carregar e renderizar projetos
+  fetch('data/projects.json')
+    .then(r => r.json())
+    .then(data => {
+      const projects = data.projects || [];
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = projects.map((p, i) => buildCard(p, i)).join('');
+
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      let cards = Array.from(grid.querySelectorAll('[data-category]'));
+      let filterTimeout = null;
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          if (filterTimeout) clearTimeout(filterTimeout);
+          const filter = this.dataset.filter;
+
+          filterBtns.forEach(b => {
+            b.classList.remove('text-primary', 'border-b-2', 'border-primary');
+            b.classList.add('text-on-surface-variant');
+          });
+          this.classList.add('text-primary', 'border-b-2', 'border-primary');
+          this.classList.remove('text-on-surface-variant');
+
+          const toHide = cards.filter(c => filter !== 'all' && c.dataset.category !== filter);
+          const toShow = cards.filter(c => filter === 'all' || c.dataset.category === filter);
+
+          toHide.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.96)';
+            card.style.pointerEvents = 'none';
+          });
+
+          filterTimeout = setTimeout(() => {
+            toHide.forEach(card => {
+              card.style.display = 'none';
+              card.style.opacity = '';
+              card.style.transform = '';
+              card.style.pointerEvents = '';
+            });
+            toShow.forEach((card, i) => {
+              if (card.style.display === 'none') {
+                card.style.display = '';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(14px) scale(0.97)';
+                card.offsetHeight;
+                setTimeout(() => { card.style.opacity = ''; card.style.transform = ''; }, i * 60);
+              }
+            });
+          }, 320);
+        });
+      });
+    });
+</script>
+</body>
+</html>

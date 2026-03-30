@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contato | Tatagiba Arquitetura</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Work+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary": "#74594a",
+          "on-surface-variant": "#5b605f",
+          "on-primary": "#f1fbeb",
+          "primary": "#586155",
+          "primary-dim": "#4c554a",
+          "on-surface": "#2f3333",
+          "outline-variant": "#afb3b2",
+          "outline": "#777c7b",
+          "background": "#faf9f8",
+          "tertiary-fixed": "#fad5c2",
+          "on-tertiary-fixed": "#4e3629",
+        },
+        fontFamily: {
+          "headline": ["Manrope"],
+          "body": ["Work Sans"],
+          "label": ["Work Sans"]
+        },
+        borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  body { overflow-x: hidden; }
+  .border-focus-color:focus {
+    border-color: #b0907f !important;
+    outline: none;
+  }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+
+<!-- Nav -->
+<header class="bg-[#F7F6F5] sticky top-0 z-50 transition-colors duration-500 border-b border-black/5">
+  <nav class="flex items-center w-full px-4 sm:px-8 py-5 max-w-screen-2xl mx-auto justify-between">
+    <a href="index.html" class="font-headline font-light text-base md:text-lg tracking-[0.2em] uppercase text-primary whitespace-nowrap">
+      Tatagiba Arquitetura
+    </a>
+    <div class="hidden md:flex items-center space-x-12">
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-primary hover:text-tertiary transition-all duration-300" href="index.html">Home</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-primary hover:text-tertiary transition-all duration-300" href="sobre.html">Sobre</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-primary hover:text-tertiary transition-all duration-300" href="projetos.html">Projetos</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-tertiary border-b-2 border-[#b0907f] pb-1" href="contato.html">Contato</a>
+    </div>
+    <button id="menu-btn" class="md:hidden">
+      <span class="material-symbols-outlined text-primary">menu</span>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden md:hidden bg-[#F7F6F5] border-t border-outline-variant/10 px-4 sm:px-8 py-6 flex flex-col gap-6">
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="index.html">Home</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="sobre.html">Sobre</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="projetos.html">Projetos</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-tertiary" href="contato.html">Contato</a>
+  </div>
+</header>
+
+<main class="min-h-screen" style="background-color: #D3C8BE;">
+
+  <!-- Hero -->
+  <section class="max-w-screen-2xl mx-auto px-4 sm:px-8 pt-16 md:pt-24 pb-8 md:pb-12">
+    <h1 class="font-headline font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight text-on-surface mb-4 leading-none">
+      VAMOS CRIAR <br/>ALGO JUNTOS.
+    </h1>
+    <div class="w-24 h-px bg-on-surface-variant opacity-30 mt-6 md:mt-8"></div>
+  </section>
+
+  <!-- Conteúdo -->
+  <section class="max-w-screen-2xl mx-auto px-4 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16 pb-16 md:pb-32">
+
+    <!-- Info -->
+    <div class="lg:col-span-5 flex flex-col justify-between space-y-10 md:space-y-16">
+      <div class="space-y-8 md:space-y-12">
+        <div>
+          <p class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-3 md:mb-4">Localização</p>
+          <p class="font-body text-lg sm:text-xl md:text-2xl leading-relaxed text-on-surface">
+            Rua Visconde de Pirajá, Ipanema<br/>
+            Rio de Janeiro, RJ — Brasil
+          </p>
+        </div>
+        <div>
+          <p class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-3 md:mb-4">Contato Direto</p>
+          <div class="space-y-2">
+            <a class="block font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="tel:+552199999999">+55 21 9999-9999</a>
+            <a class="block font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="mailto:contato@tatagiba.arq.br">contato@tatagiba.arq.br</a>
+          </div>
+        </div>
+        <div>
+          <p class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-3 md:mb-4">Social</p>
+          <a class="font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="#">@tatagiba.arquitetura</a>
+        </div>
+      </div>
+
+      <div class="hidden lg:block relative aspect-square w-full max-w-sm overflow-hidden">
+        <img alt="Detalhe arquitetônico" class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXDHbfVQFZWrmwfBR19BlN7qfIems63kHCOlorpEON3WQuxHL-52zReO-PKGG73wk78nyh86fFGHExO0Q9D7zOPcB4P5yHMeYvWNtuln2Qw08od52OlS78elmztPMF69JWsBk2h8UYYYELoA18pYTGzck9Azs3I_xK48VzwK8twYEQu0fS0YYESMabgFhSnUhWa9B_7m5r5z9j6JJnXalUy1NRBaZSEzgFg-FrNW_S_sqEl5040O1BcsmzkM2O9t3Ip7FIIsNnshw"/>
+        <div class="absolute inset-0 border border-white/10 pointer-events-none"></div>
+      </div>
+    </div>
+
+    <!-- Formulário -->
+    <div class="lg:col-span-7">
+      <form action="#" class="space-y-10 md:space-y-12">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
+          <div class="relative">
+            <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">Nome</label>
+            <input class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300" placeholder="Seu nome completo" type="text"/>
+          </div>
+          <div class="relative">
+            <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">E-mail</label>
+            <input class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300" placeholder="seu@email.com" type="email"/>
+          </div>
+        </div>
+        <div class="relative">
+          <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">Mensagem</label>
+          <textarea class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300 resize-none" placeholder="Conte-nos sobre seu projeto..." rows="4"></textarea>
+        </div>
+        <div class="pt-4 md:pt-8">
+          <button class="group relative inline-flex items-center justify-between px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dim text-on-primary w-full sm:w-auto transition-all duration-500 overflow-hidden" type="submit">
+            <span class="relative z-10 font-label font-medium tracking-[0.2em] uppercase text-xs sm:text-sm">Enviar</span>
+            <span class="material-symbols-outlined ml-4 relative z-10 transition-transform duration-300 group-hover:translate-x-2">arrow_right_alt</span>
+            <div class="absolute inset-0 bg-tertiary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+          </button>
+        </div>
+      </form>
+
+      <div class="mt-16 md:mt-24 grayscale brightness-90 hover:grayscale-0 transition-all duration-1000 overflow-hidden">
+        <img alt="Mapa de localização" class="w-full h-56 sm:h-80 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLL2_9s9M_Sm1mkLKpMcoH0vQwkiAfDfW3JXTosFyZz8J0H3g0qhoCEcnryoPIHVB08xII71mMefo5-z04I22ibJ6gBp_Xe6TIodaZvuBg0MOU4SUZlYEuopYOvtJpQp6_DS5-8_Frg81pweOT2DmcOpy8WwxG8yDBVToL4ETMEz4fkeloP5acRvwHfpK73gR4gTHcctR_bQ4RdrvNZUB2qPMEMjYnySu-ZhzVcKxkx_Xm_MsdlFwrLNwuS56b0oopyuA8hU0MeIE"/>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#677064] text-[#faf9f8] border-t border-[#a4a693]/20 py-12 md:py-16 px-4 sm:px-6 flex flex-col items-center text-center">
+  <div class="mb-6 md:mb-8 font-headline text-lg sm:text-2xl font-light tracking-[0.4em] text-white uppercase">Tatagiba Arquitetura</div>
+  <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 md:mb-12">
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="index.html">Home</a>
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="sobre.html">Sobre</a>
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="projetos.html">Projetos</a>
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-white font-bold" href="contato.html">Contato</a>
+  </div>
+  <div class="w-12 h-px bg-white/20 mb-8 md:mb-12"></div>
+  <p class="font-body tracking-[0.15em] text-[10px] uppercase text-[#faf9f8] opacity-60">
+    © 2025 Tatagiba Arquitetura. Todos os direitos reservados.
+  </p>
+</footer>
+
+<div id="page-overlay" style="position:fixed;inset:0;background:#faf9f8;z-index:9999;opacity:1;pointer-events:none;transition:opacity 0.45s ease;"></div>
+
+<script>
+  document.getElementById('menu-btn').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+
+  const overlay = document.getElementById('page-overlay');
+  requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('tel') && !href.startsWith('mailto')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
+        setTimeout(() => { window.location.href = href; }, 420);
+      });
+    }
+  });
+</script>
+</body>
+</html>

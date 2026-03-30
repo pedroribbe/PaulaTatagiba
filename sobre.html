@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sobre | Tatagiba Arquitetura</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Work+Sans:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "tertiary": "#74594a",
+          "on-surface-variant": "#5b605f",
+          "on-primary": "#f1fbeb",
+          "primary": "#586155",
+          "primary-dim": "#4c554a",
+          "on-surface": "#2f3333",
+          "outline-variant": "#afb3b2",
+          "surface-container": "#edeeed",
+          "surface": "#faf9f8",
+          "surface-container-high": "#e6e9e7",
+          "background": "#faf9f8",
+        },
+        fontFamily: {
+          "headline": ["Manrope"],
+          "body": ["Work Sans"],
+          "label": ["Work Sans"],
+          "editorial": ["DM Sans"]
+        },
+        borderRadius: {"DEFAULT": "0px", "lg": "2px", "xl": "2px", "full": "9999px"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  }
+  body { background-color: #faf9f8; overflow-x: hidden; }
+</style>
+</head>
+<body class="font-body text-on-surface">
+
+<!-- Nav -->
+<nav class="bg-[#F7F6F5] sticky top-0 z-50 transition-colors duration-500 border-b border-outline-variant/10">
+  <div class="flex justify-between items-center w-full px-4 sm:px-8 py-5 max-w-screen-2xl mx-auto">
+    <a href="index.html" class="font-headline font-light text-base md:text-lg tracking-[0.2em] uppercase text-on-surface whitespace-nowrap">
+      Tatagiba Arquitetura
+    </a>
+    <div class="hidden md:flex gap-12 items-center">
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-primary transition-all duration-300" href="index.html">Home</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-primary border-b border-primary pb-1" href="sobre.html">Sobre</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-primary transition-all duration-300" href="projetos.html">Projetos</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-primary transition-all duration-300" href="contato.html">Contato</a>
+    </div>
+    <button id="menu-btn" class="md:hidden">
+      <span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-[#F7F6F5] border-t border-outline-variant/10 px-4 sm:px-8 py-6 flex flex-col gap-6">
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="index.html">Home</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-primary" href="sobre.html">Sobre</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="projetos.html">Projetos</a>
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="contato.html">Contato</a>
+  </div>
+</nav>
+
+<main style="background-color: #F2EDEA;" class="min-h-screen">
+
+  <!-- Hero -->
+  <section class="max-w-screen-2xl mx-auto px-4 sm:px-8 pt-16 md:pt-24 pb-16 md:pb-32">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+
+      <!-- Foto -->
+      <div class="md:col-span-5 relative">
+        <div class="aspect-[4/5] overflow-hidden bg-surface-container">
+          <img alt="Paula Tatagiba, Arquiteta" class="w-full h-full object-cover transition-all duration-700 ease-in-out" src="https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"/>
+        </div>
+        <div class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-lg sm:text-2xl tracking-tighter">
+          TA
+        </div>
+      </div>
+
+      <!-- Texto -->
+      <div class="md:col-span-7 flex flex-col justify-center h-full pt-6 md:pt-0">
+        <span class="font-headline text-xs tracking-[0.3em] text-tertiary mb-4 md:mb-6 uppercase block">Conheça a fundadora</span>
+        <h1 class="font-headline text-3xl sm:text-5xl md:text-7xl font-semibold text-on-surface mb-8 md:mb-12 leading-[1.1] tracking-tight">
+          Arquitetura com <br/><span class="italic font-light text-primary">alma e precisão.</span>
+        </h1>
+        <div class="max-w-xl space-y-6 md:space-y-8 font-editorial text-base md:text-lg leading-relaxed text-on-surface-variant font-light">
+          <p>
+            Acreditamos que o espaço que habitamos é uma extensão silenciosa de quem somos. Na Tatagiba Arquitetura, cada projeto nasce de um diálogo profundo entre a técnica rigorosa e a sensibilidade estética.
+          </p>
+          <p>
+            Formada com o olhar voltado para o detalhe e a funcionalidade, busco transformar concreto e luz em experiências de refúgio. Minha trajetória é marcada pela busca incessante por materiais naturais e soluções que respeitem a cronologia do tempo.
+          </p>
+          <div class="pt-4 md:pt-8">
+            <a class="inline-flex items-center gap-4 group" href="projetos.html">
+              <span class="w-8 sm:w-12 h-[1px] bg-outline-variant group-hover:w-16 sm:group-hover:w-20 group-hover:bg-primary transition-all duration-500"></span>
+              <span class="font-headline text-xs tracking-[0.2em] uppercase text-primary font-bold">Ver Projetos</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divisor -->
+  <div class="max-w-screen-xl mx-auto px-4 sm:px-8">
+    <div class="h-[1px] w-full bg-[#A4A693]/30"></div>
+  </div>
+
+  <!-- Valores -->
+  <section class="max-w-screen-2xl mx-auto px-4 sm:px-8 py-16 md:py-32">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 md:gap-24">
+      <div class="flex flex-col space-y-4 md:space-y-6">
+        <span class="material-symbols-outlined text-tertiary text-3xl">architecture</span>
+        <h3 class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Curadoria Técnica</h3>
+        <p class="font-body text-sm leading-relaxed text-on-surface-variant">Cada material é escolhido por sua textura e durabilidade, garantindo que a estética envelheça com dignidade.</p>
+      </div>
+      <div class="flex flex-col space-y-4 md:space-y-6">
+        <span class="material-symbols-outlined text-tertiary text-3xl">light_mode</span>
+        <h3 class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Luz como Estrutura</h3>
+        <p class="font-body text-sm leading-relaxed text-on-surface-variant">Trabalhamos a iluminação natural como um elemento construtivo fundamental para o bem-estar dos moradores.</p>
+      </div>
+      <div class="flex flex-col space-y-4 md:space-y-6">
+        <span class="material-symbols-outlined text-tertiary text-3xl">eco</span>
+        <h3 class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Naturalismo Moderno</h3>
+        <p class="font-body text-sm leading-relaxed text-on-surface-variant">Integração entre o ambiente construído e o orgânico, criando harmonia entre interior e exterior.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeria assimétrica -->
+  <section class="pb-16 md:pb-32 px-4 sm:px-8 max-w-screen-2xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end">
+      <div class="md:col-span-8 h-64 sm:h-96 md:h-[500px] overflow-hidden">
+        <img alt="Detalhe arquitetônico" class="w-full h-full object-cover grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOjxhx4kJC_RsfB_BVlH_OXWi4NWcMD2ecGqJvfah6ZsI-IHIRiVXg_yHY1utilbfsALYRgZHSYUtI4AXUC6TfwgvlAAnNbQaD-UPtjz0-pE-KMTMJdwof7kk9WFb40m_oMXFxMB7XtcRi9fNImlAUS9Yk1kKlst0SGq4aPwpwFZUSPqCd6zP4CLUDl8Vc8eBX3FeoIzi2ZNU5uO38_9KFNbsEHXxyz_-oIFkjurVOwwZ6MR8ZWaK9m-SaLqzUmnEW_yj5IgywaA"/>
+      </div>
+      <div class="md:col-span-4 bg-surface-container-high p-8 sm:p-12 md:-ml-24 z-10">
+        <h4 class="font-headline text-xl md:text-2xl font-light mb-4 md:mb-6 leading-tight text-on-surface">Onde a estética encontra a função primordial.</h4>
+        <p class="font-body text-sm text-on-surface-variant mb-6 md:mb-8 leading-relaxed">
+          Projetamos para além do visual. Projetamos para o toque, para o silêncio e para o convívio. Cada linha traçada em nosso estúdio reflete um compromisso com a longevidade arquitetônica.
+        </p>
+        <a href="projetos.html" class="inline-block bg-primary text-on-primary px-6 sm:px-8 py-4 font-headline text-xs tracking-[0.2em] uppercase hover:bg-primary-dim transition-colors duration-300">
+          Ver Projetos
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-[#677064] text-[#faf9f8] border-t border-[#a4a693]/20 py-12 md:py-16 px-4 sm:px-6 flex flex-col items-center text-center">
+  <div class="text-lg sm:text-2xl font-light tracking-[0.4em] text-white mb-6 md:mb-8 font-headline uppercase">Tatagiba Arquitetura</div>
+  <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 md:mb-12">
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="index.html">Home</a>
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-white font-bold" href="sobre.html">Sobre</a>
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="projetos.html">Projetos</a>
+    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="contato.html">Contato</a>
+  </div>
+  <div class="max-w-md mb-8 md:mb-12">
+    <p class="font-body tracking-[0.1em] text-[10px] uppercase text-[#ced7c9]/60 leading-loose">
+      Rua Visconde de Pirajá • Ipanema, Rio de Janeiro • contato@tatagiba.arq.br
+    </p>
+  </div>
+  <div class="font-body tracking-[0.15em] text-[10px] uppercase text-[#faf9f8]/40">
+    © 2025 Tatagiba Arquitetura. Todos os direitos reservados.
+  </div>
+</footer>
+
+<div id="page-overlay" style="position:fixed;inset:0;background:#faf9f8;z-index:9999;opacity:1;pointer-events:none;transition:opacity 0.45s ease;"></div>
+
+<script>
+  document.getElementById('menu-btn').addEventListener('click', function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+
+  const overlay = document.getElementById('page-overlay');
+  requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('tel') && !href.startsWith('mailto')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
+        setTimeout(() => { window.location.href = href; }, 420);
+      });
+    }
+  });
+</script>
+</body>
+</html>
