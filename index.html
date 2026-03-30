@@ -254,6 +254,12 @@
   ];
   const catLabel = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
 
+  function navigateTo(href) {
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = 'all';
+    setTimeout(() => { window.location.href = href; }, 420);
+  }
+
   fetch('data/projects.json')
     .then(r => r.json())
     .then(data => {
@@ -261,7 +267,7 @@
       const grid = document.getElementById('featured-grid');
       grid.innerHTML = featured.map((p, i) => {
         const l = featuredLayouts[i] || featuredLayouts[0];
-        return `<div class="${l.cols} project-card relative overflow-hidden cursor-pointer ${l.aspect}">
+        return `<div class="${l.cols} project-card relative overflow-hidden cursor-pointer ${l.aspect}" onclick="navigateTo('projeto.html?id=${p.id}')">
           <img alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700" src="${p.image}"/>
           <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
             <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${catLabel[p.category] || p.category}</span>

@@ -39,6 +39,14 @@ collections:
                 label: Foto Principal
                 widget: image
                 hint: "Faça o upload da foto aqui. Formatos aceitos: JPG, PNG, WEBP."
+              - name: images
+                label: Fotos do Projeto
+                widget: list
+                field:
+                  name: src
+                  label: Foto
+                  widget: image
+                hint: "Adicione todas as fotos que aparecerão na página interna do projeto."
               - name: featured
                 label: Destaque na Home
                 widget: boolean

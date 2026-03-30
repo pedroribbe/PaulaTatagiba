@@ -5,6 +5,9 @@
       "name": "Casa Itanhangá",
       "category": "residencial",
       "image": "https://drive.google.com/thumbnail?id=1yJPPlP788iVbGcl3BvPLYFAgHZN9Nbxr&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1yJPPlP788iVbGcl3BvPLYFAgHZN9Nbxr&sz=w1600"
+      ],
       "featured": true
     },
     {
@@ -12,6 +15,9 @@
       "name": "Apartamento FW",
       "category": "residencial",
       "image": "https://drive.google.com/thumbnail?id=1L9p9rG8YcHt99bOGWn1jnT6vjP_vtYOJ&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1L9p9rG8YcHt99bOGWn1jnT6vjP_vtYOJ&sz=w1600"
+      ],
       "featured": true
     },
     {
@@ -19,6 +25,9 @@
       "name": "Consultório NF",
       "category": "comercial",
       "image": "https://drive.google.com/thumbnail?id=1aAObwz1CJJUqWKns5vLZbrlZ0LbBWBrz&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1aAObwz1CJJUqWKns5vLZbrlZ0LbBWBrz&sz=w1600"
+      ],
       "featured": true
     },
     {
@@ -26,6 +35,9 @@
       "name": "Quarto Ana Carolina",
       "category": "infantil",
       "image": "https://drive.google.com/thumbnail?id=1mamlEmAUupVVHlc-OgZ4Pnuzm8QO-1Z4&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1mamlEmAUupVVHlc-OgZ4Pnuzm8QO-1Z4&sz=w1600"
+      ],
       "featured": true
     },
     {
@@ -33,6 +45,9 @@
       "name": "Quarto Letícia",
       "category": "infantil",
       "image": "https://drive.google.com/thumbnail?id=1y6ZdAoqK77tYGJzA3eUVLp6hiIknwety&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1y6ZdAoqK77tYGJzA3eUVLp6hiIknwety&sz=w1600"
+      ],
       "featured": false
     },
     {
@@ -40,6 +55,9 @@
       "name": "Quarto Maitê",
       "category": "infantil",
       "image": "https://drive.google.com/thumbnail?id=198PUVlO7p6LYFwBxDP5GVGn0JQu6MvQm&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=198PUVlO7p6LYFwBxDP5GVGn0JQu6MvQm&sz=w1600"
+      ],
       "featured": false
     },
     {
@@ -47,6 +65,9 @@
       "name": "Apartamento JL",
       "category": "residencial",
       "image": "https://drive.google.com/thumbnail?id=1v8ang4M2Zu0-xe0TKCnqnmozVV5gOT7g&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1v8ang4M2Zu0-xe0TKCnqnmozVV5gOT7g&sz=w1600"
+      ],
       "featured": false
     },
     {
@@ -54,6 +75,9 @@
       "name": "Apartamento ME",
       "category": "residencial",
       "image": "https://drive.google.com/thumbnail?id=1Ov8oBRD3kNxAlNOjq-QL1IBuuvgoMFTc&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1Ov8oBRD3kNxAlNOjq-QL1IBuuvgoMFTc&sz=w1600"
+      ],
       "featured": false
     },
     {
@@ -61,6 +85,9 @@
       "name": "Quarto Luísa",
       "category": "infantil",
       "image": "https://drive.google.com/thumbnail?id=1y4kT_YV2IzlGACSIPqd3ho1s4fO_o7UU&sz=w1600",
+      "images": [
+        "https://drive.google.com/thumbnail?id=1y4kT_YV2IzlGACSIPqd3ho1s4fO_o7UU&sz=w1600"
+      ],
       "featured": false
     }
   ]
