@@ -40,7 +40,9 @@
       "Bash(curl -s \"https://api.github.com/repos/pedroribbe/PaulaTatagiba/contents/data\" -H \"Authorization: token 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\" -H \"Accept: application/vnd.github.v3+json\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://tatagibaarquitetura.netlify.app/\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://tatagibaarquitetura.netlify.app/data/projects.json\")",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://tatagibaarquitetura.netlify.app/data/content.json\")"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://tatagibaarquitetura.netlify.app/data/content.json\")",
+      "Bash(vercel --prod --yes)",
+      "Bash(curl -s -X POST \"https://painel-admin-seven-henna.vercel.app/api/auth\" -H \"Content-Type: application/json\" -d '{\"\"username\"\":\"\"tatagibaarquitetura\"\",\"\"password\"\":\"\"nnDpR*6G8hZyLsw%m4Zv\"\"}')"
     ]
   }
 }
