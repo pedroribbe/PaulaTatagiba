@@ -90,7 +90,7 @@
       <div class="space-y-8 md:space-y-12">
         <div>
           <p class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-3 md:mb-4">Localização</p>
-          <p class="font-body text-lg sm:text-xl md:text-2xl leading-relaxed text-on-surface">
+          <p id="contato-endereco" class="font-body text-lg sm:text-xl md:text-2xl leading-relaxed text-on-surface">
             Rua Visconde de Pirajá, Ipanema<br/>
             Rio de Janeiro, RJ — Brasil
           </p>
@@ -98,13 +98,13 @@
         <div>
           <p class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-3 md:mb-4">Contato Direto</p>
           <div class="space-y-2">
-            <a class="block font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="tel:+552199999999">+55 21 9999-9999</a>
-            <a class="block font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="mailto:contato@tatagiba.arq.br">contato@tatagiba.arq.br</a>
+            <a id="contato-telefone" class="block font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="tel:+552199999999">+55 21 9999-9999</a>
+            <a id="contato-email" class="block font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="mailto:contato@tatagiba.arq.br">contato@tatagiba.arq.br</a>
           </div>
         </div>
         <div>
           <p class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-3 md:mb-4">Social</p>
-          <a class="font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="#">@tatagiba.arquitetura</a>
+          <a id="contato-instagram" class="font-body text-lg sm:text-xl md:text-2xl text-on-surface hover:text-tertiary transition-colors duration-300" href="#">@tatagiba.arquitetura</a>
         </div>
       </div>
 
@@ -183,6 +183,25 @@
       });
     }
   });
+
+  fetch('data/content.json')
+    .then(r => r.json())
+    .then(c => {
+      if (c.contato) {
+        if (c.contato.endereco) document.getElementById('contato-endereco').textContent = c.contato.endereco;
+        if (c.contato.telefone) {
+          const el = document.getElementById('contato-telefone');
+          el.textContent = c.contato.telefone;
+          el.href = 'tel:' + c.contato.telefone.replace(/\D/g, '');
+        }
+        if (c.contato.email) {
+          const el = document.getElementById('contato-email');
+          el.textContent = c.contato.email;
+          el.href = 'mailto:' + c.contato.email;
+        }
+        if (c.contato.instagram) document.getElementById('contato-instagram').textContent = c.contato.instagram;
+      }
+    });
 </script>
 </body>
 </html>

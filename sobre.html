@@ -78,7 +78,7 @@
       <!-- Foto -->
       <div class="md:col-span-5 relative">
         <div class="aspect-[4/5] overflow-hidden bg-surface-container">
-          <img alt="Paula Tatagiba, Arquiteta" class="w-full h-full object-cover transition-all duration-700 ease-in-out" src="https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"/>
+          <img id="paula-foto" alt="Paula Tatagiba, Arquiteta" class="w-full h-full object-cover transition-all duration-700 ease-in-out" src="https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"/>
         </div>
         <div class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-lg sm:text-2xl tracking-tighter">
           TA
@@ -92,10 +92,10 @@
           Arquitetura com <br/><span class="italic font-light text-primary">alma e precisão.</span>
         </h1>
         <div class="max-w-xl space-y-6 md:space-y-8 font-editorial text-base md:text-lg leading-relaxed text-on-surface-variant font-light">
-          <p>
+          <p id="bio-p1">
             Acreditamos que o espaço que habitamos é uma extensão silenciosa de quem somos. Na Tatagiba Arquitetura, cada projeto nasce de um diálogo profundo entre a técnica rigorosa e a sensibilidade estética.
           </p>
-          <p>
+          <p id="bio-p2">
             Formada com o olhar voltado para o detalhe e a funcionalidade, busco transformar concreto e luz em experiências de refúgio. Minha trajetória é marcada pela busca incessante por materiais naturais e soluções que respeitem a cronologia do tempo.
           </p>
           <div class="pt-4 md:pt-8">
@@ -194,6 +194,16 @@
       });
     }
   });
+
+  fetch('data/content.json')
+    .then(r => r.json())
+    .then(c => {
+      if (c.sobre) {
+        if (c.sobre.foto) document.getElementById('paula-foto').src = c.sobre.foto;
+        if (c.sobre.bio_p1) document.getElementById('bio-p1').textContent = c.sobre.bio_p1;
+        if (c.sobre.bio_p2) document.getElementById('bio-p2').textContent = c.sobre.bio_p2;
+      }
+    });
 </script>
 </body>
 </html>

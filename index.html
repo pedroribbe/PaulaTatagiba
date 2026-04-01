@@ -116,12 +116,12 @@
   <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 items-end">
     <div class="md:col-span-7">
       <span class="text-tertiary font-label uppercase tracking-[0.2em] text-xs block mb-6 md:mb-8">Manifesto</span>
-      <h2 class="font-headline text-2xl sm:text-3xl md:text-5xl leading-[1.2] text-on-surface">
+      <h2 id="manifesto-titulo" class="font-headline text-2xl sm:text-3xl md:text-5xl leading-[1.2] text-on-surface">
         Desenhamos espaços onde a <span class="italic font-light">matéria</span> e a <span class="italic font-light">luz</span> dialogam com a essência humana.
       </h2>
     </div>
     <div class="md:col-span-4 md:col-start-9">
-      <p class="font-body text-sm sm:text-base text-on-surface-variant leading-relaxed mb-6 md:mb-8">
+      <p id="manifesto-texto" class="font-body text-sm sm:text-base text-on-surface-variant leading-relaxed mb-6 md:mb-8">
         Com base no Rio de Janeiro, o escritório Tatagiba foca na criação de projetos residenciais e comerciais que prezam pela simplicidade formal e riqueza sensorial.
       </p>
       <a class="inline-flex items-center gap-4 group" href="sobre.html">
@@ -160,16 +160,16 @@
       <span class="text-tertiary font-label uppercase tracking-[0.2em] text-xs block mb-6 md:mb-8">Expertise</span>
       <div class="space-y-8 md:space-y-12">
         <div class="border-b border-outline-variant/20 pb-5 md:pb-6">
-          <h5 class="font-headline text-base md:text-xl uppercase tracking-widest mb-2 md:mb-3">01 / Arquitetura Residencial</h5>
-          <p class="text-on-surface-variant font-body text-sm sm:text-base">Projetos únicos que traduzem o estilo de vida e os sonhos de cada família em espaços atemporais.</p>
+          <h5 id="exp-titulo-0" class="font-headline text-base md:text-xl uppercase tracking-widest mb-2 md:mb-3">01 / Arquitetura Residencial</h5>
+          <p id="exp-texto-0" class="text-on-surface-variant font-body text-sm sm:text-base">Projetos únicos que traduzem o estilo de vida e os sonhos de cada família em espaços atemporais.</p>
         </div>
         <div class="border-b border-outline-variant/20 pb-5 md:pb-6">
-          <h5 class="font-headline text-base md:text-xl uppercase tracking-widest mb-2 md:mb-3">02 / Design de Interiores</h5>
-          <p class="text-on-surface-variant font-body text-sm sm:text-base">Curadoria de mobiliário e texturas que proporcionam conforto tátil e equilíbrio visual.</p>
+          <h5 id="exp-titulo-1" class="font-headline text-base md:text-xl uppercase tracking-widest mb-2 md:mb-3">02 / Design de Interiores</h5>
+          <p id="exp-texto-1" class="text-on-surface-variant font-body text-sm sm:text-base">Curadoria de mobiliário e texturas que proporcionam conforto tátil e equilíbrio visual.</p>
         </div>
         <div class="border-b border-outline-variant/20 pb-5 md:pb-6">
-          <h5 class="font-headline text-base md:text-xl uppercase tracking-widest mb-2 md:mb-3">03 / Gestão de Obras</h5>
-          <p class="text-on-surface-variant font-body text-sm sm:text-base">Acompanhamento técnico rigoroso para garantir que a execução seja fiel ao conceito projetado.</p>
+          <h5 id="exp-titulo-2" class="font-headline text-base md:text-xl uppercase tracking-widest mb-2 md:mb-3">03 / Gestão de Obras</h5>
+          <p id="exp-texto-2" class="text-on-surface-variant font-body text-sm sm:text-base">Acompanhamento técnico rigoroso para garantir que a execução seja fiel ao conceito projetado.</p>
         </div>
       </div>
     </div>
@@ -207,15 +207,15 @@
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 w-full text-sm text-[#ced7c9] mb-10 md:mb-16 border-y border-white/10 py-10 md:py-12">
       <div>
         <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Localização</h6>
-        <p class="text-sm">Rua Visconde de Pirajá<br/>Ipanema, Rio de Janeiro, RJ</p>
+        <p id="footer-endereco" class="text-sm">Rua Visconde de Pirajá<br/>Ipanema, Rio de Janeiro, RJ</p>
       </div>
       <div>
         <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Contato</h6>
-        <p class="text-sm">contato@tatagiba.arq.br<br/>+55 21 99999-9999</p>
+        <p class="text-sm"><span id="footer-email">contato@tatagiba.arq.br</span><br/><span id="footer-telefone">+55 21 99999-9999</span></p>
       </div>
       <div>
         <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Social</h6>
-        <p class="text-sm">@tatagiba.arquitetura</p>
+        <p id="footer-instagram" class="text-sm">@tatagiba.arquitetura</p>
       </div>
     </div>
     <div class="tracking-[0.15em] text-[10px] uppercase opacity-60">
@@ -259,6 +259,27 @@
     overlay.style.pointerEvents = 'all';
     setTimeout(() => { window.location.href = href; }, 420);
   }
+
+  fetch('data/content.json')
+    .then(r => r.json())
+    .then(c => {
+      if (c.home) {
+        if (c.home.manifesto_titulo) document.getElementById('manifesto-titulo').textContent = c.home.manifesto_titulo;
+        if (c.home.manifesto_texto) document.getElementById('manifesto-texto').textContent = c.home.manifesto_texto;
+        (c.home.expertise || []).forEach((e, i) => {
+          const t = document.getElementById('exp-titulo-' + i);
+          const p = document.getElementById('exp-texto-' + i);
+          if (t && e.titulo) t.textContent = e.numero + ' / ' + e.titulo;
+          if (p && e.texto) p.textContent = e.texto;
+        });
+      }
+      if (c.contato) {
+        if (c.contato.endereco) document.getElementById('footer-endereco').textContent = c.contato.endereco;
+        if (c.contato.email) document.getElementById('footer-email').textContent = c.contato.email;
+        if (c.contato.telefone) document.getElementById('footer-telefone').textContent = c.contato.telefone;
+        if (c.contato.instagram) document.getElementById('footer-instagram').textContent = c.contato.instagram;
+      }
+    });
 
   fetch('data/projects.json')
     .then(r => r.json())
