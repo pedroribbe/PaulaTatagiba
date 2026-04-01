@@ -42,7 +42,12 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://tatagibaarquitetura.netlify.app/data/projects.json\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://tatagibaarquitetura.netlify.app/data/content.json\")",
       "Bash(vercel --prod --yes)",
-      "Bash(curl -s -X POST \"https://painel-admin-seven-henna.vercel.app/api/auth\" -H \"Content-Type: application/json\" -d '{\"\"username\"\":\"\"tatagibaarquitetura\"\",\"\"password\"\":\"\"nnDpR*6G8hZyLsw%m4Zv\"\"}')"
+      "Bash(curl -s -X POST \"https://painel-admin-seven-henna.vercel.app/api/auth\" -H \"Content-Type: application/json\" -d '{\"\"username\"\":\"\"tatagibaarquitetura\"\",\"\"password\"\":\"\"nnDpR*6G8hZyLsw%m4Zv\"\"}')",
+      "Bash(curl -s -X POST \"https://tatagiba-admin-iawu2yq23-pedroribbe-4637s-projects.vercel.app/api/auth\" -H \"Content-Type: application/json\" -d '{\"\"username\"\":\"\"tatagibaarquitetura\"\",\"\"password\"\":\"\"nnDpR*6G8hZyLsw%m4Zv\"\"}')",
+      "Bash(vercel --help)",
+      "Bash(TOKEN=\"tatagibaarquitetura:1775670726456:5958b6a6e98a3dae3a1953119dd4ab048766a26ec4543f371fa5a45cf57ce60c\" curl -s \"https://tatagiba-admin.vercel.app/api/github?path=data/projects.json\" -H \"Authorization: Bearer $TOKEN\")",
+      "WebSearch",
+      "WebFetch(domain:www.netlify.com)"
     ]
   }
 }
