@@ -174,20 +174,19 @@
       let html = '';
       images.forEach((src, i) => {
         const imgSrc = typeof src === 'object' ? src.src : src;
-        const imgTag = `<img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block" loading="${i === 0 ? 'eager' : 'lazy'}"/>`;
 
         if (i === 0) {
-          html += `<div class="w-full overflow-hidden">${imgTag}</div>`;
+          html += `<div class="w-full overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[80vh] object-contain mx-auto" loading="eager"/></div>`;
         } else if (i % 2 === 1) {
           const next = images[i + 1];
           if (next) {
             const nextSrc = typeof next === 'object' ? next.src : next;
-            html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              <div class="overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block" loading="lazy"/></div>
-              <div class="overflow-hidden"><img src="${nextSrc}" alt="${project.name}" class="w-full h-auto block" loading="lazy"/></div>
+            html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+              <div class="overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[60vh] object-contain mx-auto" loading="lazy"/></div>
+              <div class="overflow-hidden"><img src="${nextSrc}" alt="${project.name}" class="w-full h-auto block max-h-[60vh] object-contain mx-auto" loading="lazy"/></div>
             </div>`;
           } else {
-            html += `<div class="w-full overflow-hidden">${imgTag}</div>`;
+            html += `<div class="w-full overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[70vh] object-contain mx-auto" loading="lazy"/></div>`;
           }
         } else if (i % 2 === 0 && i !== 0) {
           // Já foi tratado como par acima; pula
