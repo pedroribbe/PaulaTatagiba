@@ -69,23 +69,23 @@
 <body class="bg-background text-on-surface">
 
 <!-- Nav -->
-<nav class="bg-[#faf9f8]/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-500 border-b border-outline-variant/10">
+<nav class="bg-[#F7F6F5] sticky top-0 z-50 transition-colors duration-500 border-b border-outline-variant/10">
   <div class="flex justify-between items-center w-full px-4 sm:px-8 py-5 max-w-screen-2xl mx-auto">
-    <a href="index.html">
-      <span class="font-headline font-light text-base md:text-lg tracking-[0.2em] uppercase text-on-surface whitespace-nowrap">Tatagiba Arquitetura</span>
+    <a href="index.html" class="font-headline font-light text-base md:text-lg tracking-[0.2em] uppercase text-on-surface whitespace-nowrap">
+      Tatagiba Arquitetura
     </a>
-    <div class="hidden md:flex gap-10 items-center">
-      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-tertiary border-b border-tertiary pb-1" href="index.html">Home</a>
-      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-tertiary transition-all duration-300" href="sobre.html">Sobre</a>
-      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-tertiary transition-all duration-300" href="projetos.html">Projetos</a>
-      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-tertiary transition-all duration-300" href="contato.html">Contato</a>
+    <div class="hidden md:flex gap-12 items-center">
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-primary border-b border-primary pb-1" href="index.html">Home</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-primary transition-all duration-300" href="sobre.html">Sobre</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-primary transition-all duration-300" href="projetos.html">Projetos</a>
+      <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant hover:text-primary transition-all duration-300" href="contato.html">Contato</a>
     </div>
-    <button id="menu-btn" class="md:hidden text-primary">
-      <span class="material-symbols-outlined">menu</span>
+    <button id="menu-btn" class="md:hidden">
+      <span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
     </button>
   </div>
-  <div id="mobile-menu" class="hidden md:hidden bg-[#faf9f8] border-t border-outline-variant/10 px-4 sm:px-8 py-6 flex flex-col gap-6">
-    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-tertiary" href="index.html">Home</a>
+  <div id="mobile-menu" class="hidden md:hidden bg-[#F7F6F5] border-t border-outline-variant/10 px-4 sm:px-8 py-6 flex flex-col gap-6">
+    <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-primary" href="index.html">Home</a>
     <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="sobre.html">Sobre</a>
     <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="projetos.html">Projetos</a>
     <a class="font-headline font-semibold tracking-[0.2em] text-xs uppercase text-on-surface-variant" href="contato.html">Contato</a>
@@ -152,9 +152,9 @@
 <!-- Expertise -->
 <section class="py-16 md:py-32 px-4 sm:px-8">
   <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
-    <div class="w-full md:w-1/2 relative">
+    <div id="bloco-foto-atelier" class="w-full md:w-1/2 relative" style="display:none">
       <div class="border border-outline-variant/30 p-4 absolute -top-6 -left-6 md:-top-10 md:-left-10 w-full h-full -z-10"></div>
-      <img alt="Atelier Tatagiba" class="w-full h-auto grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOLyFIs30dc1ufcAXI8dlfXUCFjOAQhOwrYawTl7tndyt1PduFU-C0fteV_Cnk7VhVIhzDGahfR55ddNRjmT5bEXEU3L9J71tDR5_H-GJ98lFRS4_iUTWWDOLsihFIFm2RfqXO2HhwF_EsCxsUhL0rWYKn8pHVoFlvBNLtEgUveLpLSzpg6kuOXd_Nrg3I1TKrh2hpDtKpw0gNyC5YapKUIEcVt5Eb8oQzXdO1EKoK9746W62T_toqs"/>
+      <img id="foto-atelier" alt="Atelier Tatagiba" class="w-full h-auto grayscale" src=""/>
     </div>
     <div class="w-full md:w-1/2">
       <span class="text-tertiary font-label uppercase tracking-[0.2em] text-xs block mb-6 md:mb-8">Expertise</span>
@@ -266,6 +266,10 @@
       if (c.home) {
         if (c.home.manifesto_titulo) document.getElementById('manifesto-titulo').textContent = c.home.manifesto_titulo;
         if (c.home.manifesto_texto) document.getElementById('manifesto-texto').textContent = c.home.manifesto_texto;
+        if (c.home.foto_atelier) {
+          document.getElementById('foto-atelier').src = c.home.foto_atelier;
+          document.getElementById('bloco-foto-atelier').style.display = '';
+        }
         (c.home.expertise || []).forEach((e, i) => {
           const t = document.getElementById('exp-titulo-' + i);
           const p = document.getElementById('exp-texto-' + i);

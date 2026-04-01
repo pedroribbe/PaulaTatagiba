@@ -41,8 +41,8 @@
   }
   body { overflow-x: hidden; }
   .border-focus-color:focus {
-    border-color: #b0907f !important;
     outline: none;
+    box-shadow: none;
   }
 </style>
 </head>
@@ -88,7 +88,7 @@
     <!-- Info -->
     <div class="lg:col-span-5 flex flex-col justify-between space-y-10 md:space-y-16">
       <div class="space-y-8 md:space-y-12">
-        <div>
+        <div id="bloco-endereco">
           <p class="font-label text-xs tracking-[0.2em] uppercase text-primary mb-3 md:mb-4">Localização</p>
           <p id="contato-endereco" class="font-body text-lg sm:text-xl md:text-2xl leading-relaxed text-on-surface">
             Rua Visconde de Pirajá, Ipanema<br/>
@@ -140,7 +140,7 @@
         </div>
       </form>
 
-      <div class="mt-16 md:mt-24 grayscale brightness-90 hover:grayscale-0 transition-all duration-1000 overflow-hidden">
+      <div id="bloco-mapa" class="mt-16 md:mt-24 grayscale brightness-90 hover:grayscale-0 transition-all duration-1000 overflow-hidden">
         <img alt="Mapa de localização" class="w-full h-56 sm:h-80 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLL2_9s9M_Sm1mkLKpMcoH0vQwkiAfDfW3JXTosFyZz8J0H3g0qhoCEcnryoPIHVB08xII71mMefo5-z04I22ibJ6gBp_Xe6TIodaZvuBg0MOU4SUZlYEuopYOvtJpQp6_DS5-8_Frg81pweOT2DmcOpy8WwxG8yDBVToL4ETMEz4fkeloP5acRvwHfpK73gR4gTHcctR_bQ4RdrvNZUB2qPMEMjYnySu-ZhzVcKxkx_Xm_MsdlFwrLNwuS56b0oopyuA8hU0MeIE"/>
       </div>
     </div>
@@ -188,6 +188,10 @@
     .then(r => r.json())
     .then(c => {
       if (c.contato) {
+        if (c.contato.mostrar_endereco === false) {
+          document.getElementById('bloco-endereco').style.display = 'none';
+          document.getElementById('bloco-mapa').style.display = 'none';
+        }
         if (c.contato.endereco) document.getElementById('contato-endereco').textContent = c.contato.endereco;
         if (c.contato.telefone) {
           const el = document.getElementById('contato-telefone');
