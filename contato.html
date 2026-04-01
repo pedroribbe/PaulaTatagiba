@@ -40,9 +40,12 @@
     font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
   }
   body { overflow-x: hidden; }
-  .border-focus-color:focus {
-    outline: none;
-    box-shadow: none;
+  input:focus, textarea:focus, select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    border-color: #afb3b2 !important;
   }
 </style>
 </head>
