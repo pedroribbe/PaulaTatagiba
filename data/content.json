@@ -1,0 +1,34 @@
+{
+  "home": {
+    "manifesto_titulo": "Desenhamos espaços onde a matéria e a luz dialogam com a essência humana.",
+    "manifesto_texto": "Com base no Rio de Janeiro, o escritório Tatagiba foca na criação de projetos residenciais e comerciais que prezam pela simplicidade formal e riqueza sensorial.",
+    "expertise": [
+      {
+        "numero": "01",
+        "titulo": "Arquitetura Residencial",
+        "texto": "Projetos únicos que traduzem o estilo de vida e os sonhos de cada família em espaços atemporais."
+      },
+      {
+        "numero": "02",
+        "titulo": "Design de Interiores",
+        "texto": "Curadoria de mobiliário e texturas que proporcionam conforto tátil e equilíbrio visual."
+      },
+      {
+        "numero": "03",
+        "titulo": "Gestão de Obras",
+        "texto": "Acompanhamento técnico rigoroso para garantir que a execução seja fiel ao conceito projetado."
+      }
+    ]
+  },
+  "sobre": {
+    "foto": "https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200",
+    "bio_p1": "Acreditamos que o espaço que habitamos é uma extensão silenciosa de quem somos. Na Tatagiba Arquitetura, cada projeto nasce de um diálogo profundo entre a técnica rigorosa e a sensibilidade estética.",
+    "bio_p2": "Formada com o olhar voltado para o detalhe e a funcionalidade, busco transformar concreto e luz em experiências de refúgio. Minha trajetória é marcada pela busca incessante por materiais naturais e soluções que respeitem a cronologia do tempo."
+  },
+  "contato": {
+    "endereco": "Rua Visconde de Pirajá, Ipanema, Rio de Janeiro, RJ",
+    "telefone": "+55 21 99999-9999",
+    "email": "contato@tatagiba.arq.br",
+    "instagram": "@tatagiba.arquitetura"
+  }
+}
