@@ -28,8 +28,8 @@
     "bio_p2": "Formada com o olhar voltado para o detalhe e a funcionalidade, busco transformar concreto e luz em experiências de refúgio. Minha trajetória é marcada pela busca incessante por materiais naturais e soluções que respeitem a cronologia do tempo."
   },
   "contato": {
-    "mostrar_endereco": false,
-    "endereco": "testesteste",
+    "mostrar_endereco": true,
+    "endereco": "Avenida Alfredo Balthazar da Silveira, 419",
     "telefone": "+5521997250979",
     "email": "testeste",
     "instagram": "@tatagiba.arquitetura"
