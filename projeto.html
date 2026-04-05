@@ -222,24 +222,27 @@
     document.getElementById('proj-name').textContent     = project.name;
     document.getElementById('proj-category').textContent = catLabel[project.category] || project.category;
 
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
     const images  = (project.images && project.images.length) ? project.images : [project.image];
     const gallery = document.getElementById('proj-gallery');
     let html = '';
 
     images.forEach((src, i) => {
-      const imgSrc = typeof src === 'object' ? src.src : src;
+      const imgSrc = esc(typeof src === 'object' ? src.src : src);
+      const altTxt = esc(project.name);
       if (i === 0) {
-        html += `<div class="w-full overflow-hidden" style="max-height:85vh"><img src="${imgSrc}" alt="${project.name}" class="w-full h-full object-cover block lb-trigger" style="max-height:85vh" data-lb="${i}" loading="eager"/></div>`;
+        html += `<div class="w-full overflow-hidden" style="max-height:85vh"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" style="max-height:85vh" data-lb="${i}" loading="eager"/></div>`;
       } else if (i % 2 === 1) {
         const next    = images[i + 1];
-        const nextSrc = next ? (typeof next === 'object' ? next.src : next) : null;
+        const nextSrc = next ? esc(typeof next === 'object' ? next.src : next) : null;
         if (nextSrc) {
           html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6" style="height:55vh">
-            <div class="overflow-hidden h-full"><img src="${imgSrc}" alt="${project.name}" class="w-full h-full object-cover block lb-trigger" data-lb="${i}" loading="lazy"/></div>
-            <div class="overflow-hidden h-full"><img src="${nextSrc}" alt="${project.name}" class="w-full h-full object-cover block lb-trigger" data-lb="${i+1}" loading="lazy"/></div>
+            <div class="overflow-hidden h-full"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" data-lb="${i}" loading="lazy"/></div>
+            <div class="overflow-hidden h-full"><img src="${nextSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" data-lb="${i+1}" loading="lazy"/></div>
           </div>`;
         } else {
-          html += `<div class="w-full overflow-hidden" style="max-height:75vh"><img src="${imgSrc}" alt="${project.name}" class="w-full h-full object-cover block lb-trigger" style="max-height:75vh" data-lb="${i}" loading="lazy"/></div>`;
+          html += `<div class="w-full overflow-hidden" style="max-height:75vh"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" style="max-height:75vh" data-lb="${i}" loading="lazy"/></div>`;
         }
       }
     });

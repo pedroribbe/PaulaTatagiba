@@ -315,13 +315,14 @@
       { cols: 'md:col-span-8', aspect: 'aspect-[16/9] md:aspect-[21/9]' },
     ];
     const catLabel = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
+    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
     grid.innerHTML = featured.map((p, i) => {
       const l = featuredLayouts[i] || featuredLayouts[0];
-      return `<div class="${l.cols} project-card relative overflow-hidden cursor-pointer ${l.aspect}" onclick="navigateTo('projeto.html?id=${p.id}')">
-        <img alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700" src="${p.image}"/>
+      return `<div class="${l.cols} project-card relative overflow-hidden cursor-pointer ${l.aspect}" onclick="navigateTo('projeto.html?id=${esc(p.id)}')">
+        <img alt="${esc(p.name)}" class="w-full h-full object-cover transition-transform duration-700" src="${esc(p.image)}"/>
         <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
-          <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${catLabel[p.category] || p.category}</span>
-          <h4 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${p.name}</h4>
+          <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${esc(catLabel[p.category] || p.category)}</span>
+          <h4 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${esc(p.name)}</h4>
         </div>
       </div>`;
     }).join('');
