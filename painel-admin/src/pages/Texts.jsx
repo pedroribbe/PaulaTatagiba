@@ -256,21 +256,24 @@ export default function Texts() {
                 ))}
               </div>
             )}
-            <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
-              <input
-                value={newFotoUrl}
-                onChange={e => setNewFotoUrl(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && addFoto(newFotoUrl)}
-                placeholder="Cole a URL e pressione Enter"
-                style={{ flex: 1 }}
-              />
-              <button className="btn btn-ghost" onClick={() => addFoto(newFotoUrl)}>
-                <span className="icon">add</span>
-              </button>
-              <ImageUpload
-                label="Upload"
-                onUpload={url => setContent(c => ({ ...c, sobre: { ...c.sobre, fotos: [...(c.sobre.fotos || []), url] } }))}
-              />
+            <div className="field">
+              <label>Adicionar foto</label>
+              <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+                <input
+                  value={newFotoUrl}
+                  onChange={e => setNewFotoUrl(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && addFoto(newFotoUrl)}
+                  placeholder="https://... ou use o botão para upload"
+                  style={{ flex: 1 }}
+                />
+                <button className="btn btn-ghost" onClick={() => addFoto(newFotoUrl)}>
+                  <span className="icon">add</span>
+                </button>
+                <ImageUpload
+                  label="Upload"
+                  onUpload={url => setContent(c => ({ ...c, sobre: { ...c.sobre, fotos: [...(c.sobre.fotos || []), url] } }))}
+                />
+              </div>
             </div>
           </div>
 
