@@ -77,8 +77,8 @@
 
       <!-- Foto -->
       <div class="md:col-span-5 relative">
-        <div id="paula-slideshow" class="aspect-[4/5] overflow-hidden bg-surface-container relative">
-          <img id="paula-foto" alt="Paula Tatagiba, Arquiteta" class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700" src="https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"/>
+        <div class="aspect-[4/5] overflow-hidden bg-surface-container">
+          <img id="paula-foto" alt="Paula Tatagiba, Arquiteta" class="w-full h-full object-cover transition-all duration-700 ease-in-out" src="https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"/>
         </div>
         <div id="logo-badge" class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-primary flex items-center justify-center overflow-hidden p-2 sm:p-3">
           <img id="site-logo-img" src="" alt="Tatagiba Arquitetura" class="w-full h-full object-contain hidden"/>
@@ -223,46 +223,9 @@
       document.getElementById('site-logo-text').classList.add('hidden');
     }
 
-    // ── Fotos de Paula (slideshow) ────────────────────────────────
-    const fotos = c.sobre?.fotos?.length ? c.sobre.fotos
-                : c.sobre?.foto          ? [c.sobre.foto]
-                : [];
-    if (fotos.length > 0) {
-      const slideshow = document.getElementById('paula-slideshow');
-      const mainImg   = document.getElementById('paula-foto');
-      mainImg.src = fotos[0];
-
-      if (fotos.length > 1) {
-        const imgs = [mainImg, ...fotos.slice(1).map(src => {
-          const img = document.createElement('img');
-          img.src = src;
-          img.alt = 'Paula Tatagiba, Arquiteta';
-          img.className = 'w-full h-full object-cover absolute inset-0 transition-opacity duration-700 opacity-0';
-          slideshow.appendChild(img);
-          return img;
-        })];
-
-        const dotsWrap = document.createElement('div');
-        dotsWrap.className = 'absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10';
-        fotos.forEach((_, i) => {
-          const d = document.createElement('button');
-          d.style.cssText = `width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s;background:${i===0?'rgba(255,255,255,.95)':'rgba(255,255,255,.4)'}`;
-          d.addEventListener('click', () => go(i));
-          dotsWrap.appendChild(d);
-        });
-        slideshow.appendChild(dotsWrap);
-
-        let cur = 0;
-        function go(idx) {
-          imgs[cur].classList.add('opacity-0');
-          dotsWrap.children[cur].style.background = 'rgba(255,255,255,.4)';
-          cur = idx;
-          imgs[cur].classList.remove('opacity-0');
-          dotsWrap.children[cur].style.background = 'rgba(255,255,255,.95)';
-        }
-        setInterval(() => go((cur + 1) % fotos.length), 4000);
-      }
-    }
+    // ── Foto de Paula ─────────────────────────────────────────────
+    const foto = c.sobre?.fotos?.[0] || c.sobre?.foto || '';
+    if (foto) document.getElementById('paula-foto').src = foto;
 
     // ── Bio ───────────────────────────────────────────────────────
     if (c.sobre?.bio_p1) document.getElementById('bio-p1').textContent = c.sobre.bio_p1;

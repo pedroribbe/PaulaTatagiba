@@ -235,45 +235,32 @@ export default function Texts() {
       {/* ── SOBRE ─────────────────────────────────────────────────── */}
       {tab === 'sobre' && (
         <>
-          {/* Fotos de Paula */}
+          {/* Foto de Paula */}
           <div className="section-group">
-            <p className="section-title">Fotos de Paula</p>
-            <p style={{ fontSize: '.78rem', color: 'var(--text-3)', marginBottom: '1rem' }}>
-              Adicione uma ou mais fotos. A primeira é a principal; as demais formam um slideshow automático.
-            </p>
-            {(content.sobre.fotos || []).length > 0 && (
-              <div className="gallery-grid" style={{ marginBottom: '1rem' }}>
-                {(content.sobre.fotos || []).map((src, i) => (
-                  <div key={i} className="gallery-item">
-                    <img src={src} alt="" />
-                    {i === 0 && (
-                      <span style={{ position: 'absolute', top: 4, left: 4, background: 'var(--accent)', color: '#f4ede8', fontSize: '.6rem', padding: '2px 6px', borderRadius: 2, fontWeight: 700, letterSpacing: '.04em' }}>
-                        Principal
-                      </span>
-                    )}
-                    <button className="remove-btn" onClick={() => removeFoto(i)}>✕</button>
-                  </div>
-                ))}
-              </div>
-            )}
+            <p className="section-title">Foto de Paula</p>
             <div className="field">
-              <label>Adicionar foto</label>
+              <label>Foto de perfil</label>
               <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
                 <input
-                  value={newFotoUrl}
-                  onChange={e => setNewFotoUrl(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && addFoto(newFotoUrl)}
+                  value={(content.sobre.fotos || [])[0] || ''}
+                  onChange={e => set('sobre', 'fotos', [e.target.value])}
                   placeholder="https://... ou use o botão para upload"
                   style={{ flex: 1 }}
                 />
-                <button className="btn btn-ghost" onClick={() => addFoto(newFotoUrl)}>
-                  <span className="icon">add</span>
-                </button>
                 <ImageUpload
                   label="Upload"
-                  onUpload={url => setContent(c => ({ ...c, sobre: { ...c.sobre, fotos: [...(c.sobre.fotos || []), url] } }))}
+                  onUpload={url => set('sobre', 'fotos', [url])}
                 />
               </div>
+              {(content.sobre.fotos || [])[0] && (
+                <img
+                  src={content.sobre.fotos[0]}
+                  alt=""
+                  className="img-preview"
+                  style={{ maxWidth: 160, aspectRatio: '4/5', objectFit: 'cover', marginTop: '.5rem' }}
+                  onError={e => { e.target.style.display = 'none'; }}
+                />
+              )}
             </div>
           </div>
 

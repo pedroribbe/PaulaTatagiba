@@ -229,6 +229,9 @@ export default function Projects() {
               </div>
               <div className="field">
                 <label>Galeria de Fotos</label>
+                <p style={{ fontSize: '.75rem', color: 'var(--text-3)', marginBottom: '.4rem' }}>
+                  Clique em ★ em qualquer foto para usá-la como capa.
+                </p>
                 <div style={{ display: 'flex', gap: '.5rem' }}>
                   <input
                     value={newImageUrl}
@@ -243,13 +246,25 @@ export default function Projects() {
                 </div>
                 <ImageUpload
                   label="Upload para galeria"
-                  onUpload={url => setModal(m => ({ ...m, data: { ...m.data, images: [...(m.data.images || []), url] } }))}
+                  multiple
+                  onUpload={url => setModal(m => {
+                    const images = [...(m.data.images || []), url];
+                    // primeira foto enviada vira capa automaticamente
+                    const image = m.data.image || url;
+                    return { ...m, data: { ...m.data, images, image } };
+                  })}
                 />
                 {(modal.data.images || []).length > 0 && (
                   <div className="gallery-grid" style={{ marginTop: '.5rem' }}>
                     {modal.data.images.map((src, i) => (
                       <div key={i} className="gallery-item">
                         <img src={src} alt="" />
+                        <button
+                          className="remove-btn"
+                          style={{ right: 'auto', left: 4, background: modal.data.image === src ? '#c8a96e' : 'rgba(0,0,0,.45)', fontSize: '0.7rem' }}
+                          title="Definir como capa"
+                          onClick={() => modalSet('image', src)}
+                        >★</button>
                         <button className="remove-btn" onClick={() => removeImage(i)}>✕</button>
                       </div>
                     ))}
