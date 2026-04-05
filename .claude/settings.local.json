@@ -52,7 +52,8 @@
       "Bash(do)",
       "Bash(sed -i 's|\"\"COLE_AQUI_API_KEY\"\"|\"\"AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw\"\"|g' \"$f\")",
       "Bash(sed -i 's|\"\"COLE_AQUI_AUTH_DOMAIN\"\"|\"\"tatagiba-arquitetura.firebaseapp.com\"\"|g' \"$f\")",
-      "Bash(sed -i 's|\"\"COLE_AQUI_PROJECT_ID\"\"|\"\"tatagiba-arquitetura\"\"|g' \"$f\")"
+      "Bash(sed -i 's|\"\"COLE_AQUI_PROJECT_ID\"\"|\"\"tatagiba-arquitetura\"\"|g' \"$f\")",
+      "Bash(ls *.json)"
     ]
   }
 }
