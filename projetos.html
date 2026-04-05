@@ -221,59 +221,110 @@
     </div>`;
     }
 
-    // Carregar e renderizar projetos
-    fetch('data/projects.json')
-      .then(r => r.json())
-      .then(data => {
-        const projects = data.projects || [];
-        const grid = document.getElementById('projects-grid');
-        grid.innerHTML = projects.map((p, i) => buildCard(p, i)).join('');
+  </script>
 
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        let cards = Array.from(grid.querySelectorAll('[data-category]'));
-        let filterTimeout = null;
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+    import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
-        filterBtns.forEach(btn => {
-          btn.addEventListener('click', function () {
-            if (filterTimeout) clearTimeout(filterTimeout);
-            const filter = this.dataset.filter;
+    const app = initializeApp({
+      apiKey:            "AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw",
+      authDomain:        "tatagiba-arquitetura.firebaseapp.com",
+      projectId:         "tatagiba-arquitetura",
+      storageBucket:     "tatagiba-arquitetura.firebasestorage.app",
+      messagingSenderId: "649936737333",
+      appId:             "1:649936737333:web:661bae2f86310a8c128d7c",
+    });
+    const db = getFirestore(app);
 
-            filterBtns.forEach(b => {
-              b.classList.remove('text-primary', 'border-b-2', 'border-primary');
-              b.classList.add('text-on-surface-variant');
-            });
-            this.classList.add('text-primary', 'border-b-2', 'border-primary');
-            this.classList.remove('text-on-surface-variant');
+    try {
+      const snap = await getDoc(doc(db, 'settings', 'projects'));
+      const data = snap.data() || {};
+      const projects = data.projects || [];
+      const grid = document.getElementById('projects-grid');
 
-            const toHide = cards.filter(c => filter !== 'all' && c.dataset.category !== filter);
-            const toShow = cards.filter(c => filter === 'all' || c.dataset.category === filter);
+      const layouts = [
+        { cols: 'md:col-span-4', aspect: 'aspect-[16/10]', extra: '' },
+        { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[4/5]', extra: 'md:mt-24' },
+        { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]', extra: '' },
+        { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]', extra: 'md:-mt-12' },
+        { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]', extra: '' },
+        { cols: 'md:col-span-6', aspect: 'aspect-[16/9] md:aspect-[21/9]', extra: 'mt-2 md:mt-8' },
+        { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: '' },
+        { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: '' },
+      ];
+      const extraLayouts = [
+        { cols: 'md:col-span-2', aspect: 'aspect-[4/3] md:aspect-[1/1]', extra: 'mt-2 md:mt-8' },
+        { cols: 'md:col-span-4', aspect: 'aspect-[16/10]', extra: 'mt-2 md:mt-8' },
+        { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: 'mt-2' },
+        { cols: 'md:col-span-3', aspect: 'aspect-[4/3] md:aspect-[16/10]', extra: 'mt-2' },
+      ];
+      const catLabel = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
 
-            toHide.forEach(card => {
-              card.style.opacity = '0';
-              card.style.transform = 'scale(0.96)';
-              card.style.pointerEvents = 'none';
-            });
+      function getLayout(i) {
+        return i < layouts.length ? layouts[i] : extraLayouts[(i - layouts.length) % extraLayouts.length];
+      }
 
-            filterTimeout = setTimeout(() => {
-              toHide.forEach(card => {
-                card.style.display = 'none';
-                card.style.opacity = '';
-                card.style.transform = '';
-                card.style.pointerEvents = '';
-              });
-              toShow.forEach((card, i) => {
-                if (card.style.display === 'none') {
-                  card.style.display = '';
-                  card.style.opacity = '0';
-                  card.style.transform = 'translateY(14px) scale(0.97)';
-                  card.offsetHeight;
-                  setTimeout(() => { card.style.opacity = ''; card.style.transform = ''; }, i * 60);
-                }
-              });
-            }, 320);
+      function buildCard(p, i) {
+        const l = getLayout(i);
+        return `<div class="${l.cols} ${l.extra} project-card relative cursor-pointer overflow-hidden ${l.aspect}" data-category="${p.category}" onclick="navigateTo('projeto.html?id=${p.id}')">
+          <img alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="${p.image}"/>
+          <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
+            <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${catLabel[p.category] || p.category}</span>
+            <h3 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${p.name}</h3>
+          </div>
+        </div>`;
+      }
+
+      grid.innerHTML = projects.map((p, i) => buildCard(p, i)).join('');
+
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      let cards = Array.from(grid.querySelectorAll('[data-category]'));
+      let filterTimeout = null;
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+          if (filterTimeout) clearTimeout(filterTimeout);
+          const filter = this.dataset.filter;
+
+          filterBtns.forEach(b => {
+            b.classList.remove('text-primary', 'border-b-2', 'border-primary');
+            b.classList.add('text-on-surface-variant');
           });
+          this.classList.add('text-primary', 'border-b-2', 'border-primary');
+          this.classList.remove('text-on-surface-variant');
+
+          const toHide = cards.filter(c => filter !== 'all' && c.dataset.category !== filter);
+          const toShow = cards.filter(c => filter === 'all' || c.dataset.category === filter);
+
+          toHide.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.96)';
+            card.style.pointerEvents = 'none';
+          });
+
+          filterTimeout = setTimeout(() => {
+            toHide.forEach(card => {
+              card.style.display = 'none';
+              card.style.opacity = '';
+              card.style.transform = '';
+              card.style.pointerEvents = '';
+            });
+            toShow.forEach((card, i) => {
+              if (card.style.display === 'none') {
+                card.style.display = '';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(14px) scale(0.97)';
+                card.offsetHeight;
+                setTimeout(() => { card.style.opacity = ''; card.style.transform = ''; }, i * 60);
+              }
+            });
+          }, 320);
         });
       });
+    } catch (e) {
+      console.warn('Firebase:', e);
+    }
   </script>
 </body>
 

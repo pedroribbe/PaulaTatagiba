@@ -150,51 +150,63 @@
     }
   });
 
-  // Carregar dados do projeto
-  const params = new URLSearchParams(window.location.search);
+</script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+
+  const app = initializeApp({
+    apiKey:            "AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw",
+    authDomain:        "tatagiba-arquitetura.firebaseapp.com",
+    projectId:         "tatagiba-arquitetura",
+    storageBucket:     "tatagiba-arquitetura.firebasestorage.app",
+    messagingSenderId: "649936737333",
+    appId:             "1:649936737333:web:661bae2f86310a8c128d7c",
+  });
+  const db = getFirestore(app);
+
+  const params    = new URLSearchParams(window.location.search);
   const projectId = params.get('id');
+  const catLabel  = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
 
-  const catLabel = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'projects'));
+    const data  = snap.data() || {};
+    const project = (data.projects || []).find(p => p.id === projectId);
+    if (!project) { window.location.href = 'projetos.html'; }
 
-  fetch('data/projects.json')
-    .then(r => r.json())
-    .then(data => {
-      const project = (data.projects || []).find(p => p.id === projectId);
-      if (!project) { window.location.href = 'projetos.html'; return; }
+    document.title = `${project.name} | Tatagiba Arquitetura`;
+    document.getElementById('proj-name').textContent     = project.name;
+    document.getElementById('proj-category').textContent = catLabel[project.category] || project.category;
 
-      document.title = `${project.name} | Tatagiba Arquitetura`;
-      document.getElementById('proj-name').textContent = project.name;
-      document.getElementById('proj-category').textContent = catLabel[project.category] || project.category;
+    const images  = (project.images && project.images.length) ? project.images : [project.image];
+    const gallery = document.getElementById('proj-gallery');
+    let html = '';
 
-      const images = (project.images && project.images.length) ? project.images : [project.image];
-      const gallery = document.getElementById('proj-gallery');
-
-      // Primeira imagem: full width, alta
-      // A partir da segunda: pares lado a lado; ímpares sozinhos full width
-      let html = '';
-      images.forEach((src, i) => {
-        const imgSrc = typeof src === 'object' ? src.src : src;
-
-        if (i === 0) {
-          html += `<div class="w-full overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[80vh] object-contain mx-auto" loading="eager"/></div>`;
-        } else if (i % 2 === 1) {
-          const next = images[i + 1];
-          if (next) {
-            const nextSrc = typeof next === 'object' ? next.src : next;
-            html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-              <div class="overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[60vh] object-contain mx-auto" loading="lazy"/></div>
-              <div class="overflow-hidden"><img src="${nextSrc}" alt="${project.name}" class="w-full h-auto block max-h-[60vh] object-contain mx-auto" loading="lazy"/></div>
-            </div>`;
-          } else {
-            html += `<div class="w-full overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[70vh] object-contain mx-auto" loading="lazy"/></div>`;
-          }
-        } else if (i % 2 === 0 && i !== 0) {
-          // Já foi tratado como par acima; pula
+    images.forEach((src, i) => {
+      const imgSrc = typeof src === 'object' ? src.src : src;
+      if (i === 0) {
+        html += `<div class="w-full overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[80vh] object-contain mx-auto" loading="eager"/></div>`;
+      } else if (i % 2 === 1) {
+        const next    = images[i + 1];
+        const nextSrc = next ? (typeof next === 'object' ? next.src : next) : null;
+        if (nextSrc) {
+          html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+            <div class="overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[60vh] object-contain mx-auto" loading="lazy"/></div>
+            <div class="overflow-hidden"><img src="${nextSrc}" alt="${project.name}" class="w-full h-auto block max-h-[60vh] object-contain mx-auto" loading="lazy"/></div>
+          </div>`;
+        } else {
+          html += `<div class="w-full overflow-hidden"><img src="${imgSrc}" alt="${project.name}" class="w-full h-auto block max-h-[70vh] object-contain mx-auto" loading="lazy"/></div>`;
         }
-      });
-
-      gallery.innerHTML = html;
+      }
+      // i par > 0 já foi tratado como par acima
     });
+
+    gallery.innerHTML = html;
+  } catch (e) {
+    console.warn('Firebase:', e);
+  }
 </script>
 </body>
 </html>

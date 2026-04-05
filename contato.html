@@ -187,28 +187,46 @@
     }
   });
 
-  fetch('data/content.json')
-    .then(r => r.json())
-    .then(c => {
-      if (c.contato) {
-        if (c.contato.mostrar_endereco === false) {
-          document.getElementById('bloco-endereco').style.display = 'none';
-          document.getElementById('bloco-mapa').style.display = 'none';
-        }
-        if (c.contato.endereco) document.getElementById('contato-endereco').textContent = c.contato.endereco;
-        if (c.contato.telefone) {
-          const el = document.getElementById('contato-telefone');
-          el.textContent = c.contato.telefone;
-          el.href = 'tel:' + c.contato.telefone.replace(/\D/g, '');
-        }
-        if (c.contato.email) {
-          const el = document.getElementById('contato-email');
-          el.textContent = c.contato.email;
-          el.href = 'mailto:' + c.contato.email;
-        }
-        if (c.contato.instagram) document.getElementById('contato-instagram').textContent = c.contato.instagram;
+</script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+
+  const app = initializeApp({
+    apiKey:            "AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw",
+    authDomain:        "tatagiba-arquitetura.firebaseapp.com",
+    projectId:         "tatagiba-arquitetura",
+    storageBucket:     "tatagiba-arquitetura.firebasestorage.app",
+    messagingSenderId: "649936737333",
+    appId:             "1:649936737333:web:661bae2f86310a8c128d7c",
+  });
+  const db = getFirestore(app);
+
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'content'));
+    const c = snap.data() || {};
+    if (c.contato) {
+      if (c.contato.mostrar_endereco === false) {
+        document.getElementById('bloco-endereco').style.display = 'none';
+        document.getElementById('bloco-mapa').style.display = 'none';
       }
-    });
+      if (c.contato.endereco) document.getElementById('contato-endereco').textContent = c.contato.endereco;
+      if (c.contato.telefone) {
+        const el = document.getElementById('contato-telefone');
+        el.textContent = c.contato.telefone;
+        el.href = 'tel:' + c.contato.telefone.replace(/\D/g, '');
+      }
+      if (c.contato.email) {
+        const el = document.getElementById('contato-email');
+        el.textContent = c.contato.email;
+        el.href = 'mailto:' + c.contato.email;
+      }
+      if (c.contato.instagram) document.getElementById('contato-instagram').textContent = c.contato.instagram;
+    }
+  } catch (e) {
+    console.warn('Firebase:', e);
+  }
 </script>
 </body>
 </html>

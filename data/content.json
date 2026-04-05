@@ -1,4 +1,7 @@
 {
+  "geral": {
+    "logo": ""
+  },
   "home": {
     "foto_capa": "https://res.cloudinary.com/dn2dwljgy/image/upload/v1775066045/dyg82iio6hlorzzrz1sc.jpg",
     "manifesto_titulo": "Desenhamos espaços onde a matéria e a luz dialogam com a essência humana.",
@@ -23,7 +26,24 @@
     ]
   },
   "sobre": {
-    "foto": "https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200",
+    "fotos": ["https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"],
+    "foto_fundo": "",
+    "valores": [
+      {
+        "titulo": "Curadoria Técnica",
+        "texto": "Cada material é escolhido por sua textura e durabilidade, garantindo que a estética envelheça com dignidade."
+      },
+      {
+        "titulo": "Luz como Estrutura",
+        "texto": "Trabalhamos a iluminação natural como um elemento construtivo fundamental para o bem-estar dos moradores."
+      },
+      {
+        "titulo": "Naturalismo Moderno",
+        "texto": "Integração entre o ambiente construído e o orgânico, criando harmonia entre interior e exterior."
+      }
+    ],
+    "destaque_titulo": "Onde a estética encontra a função primordial.",
+    "destaque_texto": "Projetamos para além do visual. Projetamos para o toque, para o silêncio e para o convívio. Cada linha traçada em nosso estúdio reflete um compromisso com a longevidade arquitetônica.",
     "bio_p1": "Acreditamos que o espaço que habitamos é uma extensão silenciosa de quem somos. Na Tatagiba Arquitetura, cada projeto nasce de um diálogo profundo entre a técnica rigorosa e a sensibilidade estética.",
     "bio_p2": "Formada com o olhar voltado para o detalhe e a funcionalidade, busco transformar concreto e luz em experiências de refúgio. Minha trajetória é marcada pela busca incessante por materiais naturais e soluções que respeitem a cronologia do tempo."
   },

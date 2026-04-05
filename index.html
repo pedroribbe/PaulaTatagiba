@@ -260,48 +260,74 @@
     setTimeout(() => { window.location.href = href; }, 420);
   }
 
-  fetch('data/content.json')
-    .then(r => r.json())
-    .then(c => {
-      if (c.home) {
-        if (c.home.foto_capa) document.getElementById('hero-img').src = c.home.foto_capa;
-        if (c.home.manifesto_titulo) document.getElementById('manifesto-titulo').textContent = c.home.manifesto_titulo;
-        if (c.home.manifesto_texto) document.getElementById('manifesto-texto').textContent = c.home.manifesto_texto;
-        if (c.home.foto_atelier) {
-          document.getElementById('foto-atelier').src = c.home.foto_atelier;
-          document.getElementById('bloco-foto-atelier').style.visibility = 'visible';
-        }
-        (c.home.expertise || []).forEach((e, i) => {
-          const t = document.getElementById('exp-titulo-' + i);
-          const p = document.getElementById('exp-texto-' + i);
-          if (t && e.titulo) t.textContent = e.numero + ' / ' + e.titulo;
-          if (p && e.texto) p.textContent = e.texto;
-        });
-      }
-      if (c.contato) {
-        if (c.contato.endereco) document.getElementById('footer-endereco').textContent = c.contato.endereco;
-        if (c.contato.email) document.getElementById('footer-email').textContent = c.contato.email;
-        if (c.contato.telefone) document.getElementById('footer-telefone').textContent = c.contato.telefone;
-        if (c.contato.instagram) document.getElementById('footer-instagram').textContent = c.contato.instagram;
-      }
-    });
+</script>
 
-  fetch('data/projects.json')
-    .then(r => r.json())
-    .then(data => {
-      const featured = (data.projects || []).filter(p => p.featured).slice(0, 4);
-      const grid = document.getElementById('featured-grid');
-      grid.innerHTML = featured.map((p, i) => {
-        const l = featuredLayouts[i] || featuredLayouts[0];
-        return `<div class="${l.cols} project-card relative overflow-hidden cursor-pointer ${l.aspect}" onclick="navigateTo('projeto.html?id=${p.id}')">
-          <img alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700" src="${p.image}"/>
-          <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
-            <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${catLabel[p.category] || p.category}</span>
-            <h4 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${p.name}</h4>
-          </div>
-        </div>`;
-      }).join('');
-    });
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+
+  const app = initializeApp({
+    apiKey:            "AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw",
+    authDomain:        "tatagiba-arquitetura.firebaseapp.com",
+    projectId:         "tatagiba-arquitetura",
+    storageBucket:     "tatagiba-arquitetura.firebasestorage.app",
+    messagingSenderId: "649936737333",
+    appId:             "1:649936737333:web:661bae2f86310a8c128d7c",
+  });
+  const db = getFirestore(app);
+
+  try {
+    const [snapC, snapP] = await Promise.all([
+      getDoc(doc(db, 'settings', 'content')),
+      getDoc(doc(db, 'settings', 'projects')),
+    ]);
+
+    const c = snapC.data() || {};
+    if (c.home) {
+      if (c.home.foto_capa) document.getElementById('hero-img').src = c.home.foto_capa;
+      if (c.home.manifesto_titulo) document.getElementById('manifesto-titulo').textContent = c.home.manifesto_titulo;
+      if (c.home.manifesto_texto) document.getElementById('manifesto-texto').textContent = c.home.manifesto_texto;
+      if (c.home.foto_atelier) {
+        document.getElementById('foto-atelier').src = c.home.foto_atelier;
+        document.getElementById('bloco-foto-atelier').style.visibility = 'visible';
+      }
+      (c.home.expertise || []).forEach((e, i) => {
+        const t = document.getElementById('exp-titulo-' + i);
+        const p = document.getElementById('exp-texto-' + i);
+        if (t && e.titulo) t.textContent = e.numero + ' / ' + e.titulo;
+        if (p && e.texto)  p.textContent = e.texto;
+      });
+    }
+    if (c.contato) {
+      if (c.contato.endereco)  document.getElementById('footer-endereco').textContent  = c.contato.endereco;
+      if (c.contato.email)     document.getElementById('footer-email').textContent     = c.contato.email;
+      if (c.contato.telefone)  document.getElementById('footer-telefone').textContent  = c.contato.telefone;
+      if (c.contato.instagram) document.getElementById('footer-instagram').textContent = c.contato.instagram;
+    }
+
+    const data = snapP.data() || {};
+    const featured = (data.projects || []).filter(p => p.featured).slice(0, 4);
+    const grid = document.getElementById('featured-grid');
+    const featuredLayouts = [
+      { cols: 'md:col-span-8', aspect: 'aspect-[16/9]' },
+      { cols: 'md:col-span-4', aspect: 'aspect-[16/9] md:aspect-[3/4]' },
+      { cols: 'md:col-span-4', aspect: 'aspect-[16/9] md:aspect-square' },
+      { cols: 'md:col-span-8', aspect: 'aspect-[16/9] md:aspect-[21/9]' },
+    ];
+    const catLabel = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
+    grid.innerHTML = featured.map((p, i) => {
+      const l = featuredLayouts[i] || featuredLayouts[0];
+      return `<div class="${l.cols} project-card relative overflow-hidden cursor-pointer ${l.aspect}" onclick="navigateTo('projeto.html?id=${p.id}')">
+        <img alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700" src="${p.image}"/>
+        <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
+          <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${catLabel[p.category] || p.category}</span>
+          <h4 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${p.name}</h4>
+        </div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    console.warn('Firebase:', e);
+  }
 </script>
 </body>
 </html>

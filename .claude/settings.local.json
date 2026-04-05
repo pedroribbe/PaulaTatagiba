@@ -47,7 +47,12 @@
       "Bash(vercel --help)",
       "Bash(TOKEN=\"tatagibaarquitetura:1775670726456:5958b6a6e98a3dae3a1953119dd4ab048766a26ec4543f371fa5a45cf57ce60c\" curl -s \"https://tatagiba-admin.vercel.app/api/github?path=data/projects.json\" -H \"Authorization: Bearer $TOKEN\")",
       "WebSearch",
-      "WebFetch(domain:www.netlify.com)"
+      "WebFetch(domain:www.netlify.com)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(sed -i 's|\"\"COLE_AQUI_API_KEY\"\"|\"\"AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw\"\"|g' \"$f\")",
+      "Bash(sed -i 's|\"\"COLE_AQUI_AUTH_DOMAIN\"\"|\"\"tatagiba-arquitetura.firebaseapp.com\"\"|g' \"$f\")",
+      "Bash(sed -i 's|\"\"COLE_AQUI_PROJECT_ID\"\"|\"\"tatagiba-arquitetura\"\"|g' \"$f\")"
     ]
   }
 }

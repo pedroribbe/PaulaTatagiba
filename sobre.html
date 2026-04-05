@@ -77,11 +77,12 @@
 
       <!-- Foto -->
       <div class="md:col-span-5 relative">
-        <div class="aspect-[4/5] overflow-hidden bg-surface-container">
-          <img id="paula-foto" alt="Paula Tatagiba, Arquiteta" class="w-full h-full object-cover transition-all duration-700 ease-in-out" src="https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"/>
+        <div id="paula-slideshow" class="aspect-[4/5] overflow-hidden bg-surface-container relative">
+          <img id="paula-foto" alt="Paula Tatagiba, Arquiteta" class="w-full h-full object-cover absolute inset-0 transition-opacity duration-700" src="https://drive.google.com/thumbnail?id=169NepWDbGgwW5Tr2UC0y4FD0_vmGozo9&sz=w1200"/>
         </div>
-        <div class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-primary text-on-primary flex items-center justify-center font-headline font-bold text-lg sm:text-2xl tracking-tighter">
-          TA
+        <div id="logo-badge" class="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 w-16 h-16 sm:w-24 sm:h-24 bg-primary flex items-center justify-center overflow-hidden p-2 sm:p-3">
+          <img id="site-logo-img" src="" alt="Tatagiba Arquitetura" class="w-full h-full object-contain hidden"/>
+          <span id="site-logo-text" class="text-on-primary font-headline font-bold text-lg sm:text-2xl tracking-tighter">TA</span>
         </div>
       </div>
 
@@ -119,18 +120,18 @@
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-12 md:gap-24">
       <div class="flex flex-col space-y-4 md:space-y-6">
         <span class="material-symbols-outlined text-tertiary text-3xl">architecture</span>
-        <h3 class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Curadoria Técnica</h3>
-        <p class="font-body text-sm leading-relaxed text-on-surface-variant">Cada material é escolhido por sua textura e durabilidade, garantindo que a estética envelheça com dignidade.</p>
+        <h3 id="valor-titulo-0" class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Curadoria Técnica</h3>
+        <p id="valor-texto-0" class="font-body text-sm leading-relaxed text-on-surface-variant">Cada material é escolhido por sua textura e durabilidade, garantindo que a estética envelheça com dignidade.</p>
       </div>
       <div class="flex flex-col space-y-4 md:space-y-6">
         <span class="material-symbols-outlined text-tertiary text-3xl">light_mode</span>
-        <h3 class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Luz como Estrutura</h3>
-        <p class="font-body text-sm leading-relaxed text-on-surface-variant">Trabalhamos a iluminação natural como um elemento construtivo fundamental para o bem-estar dos moradores.</p>
+        <h3 id="valor-titulo-1" class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Luz como Estrutura</h3>
+        <p id="valor-texto-1" class="font-body text-sm leading-relaxed text-on-surface-variant">Trabalhamos a iluminação natural como um elemento construtivo fundamental para o bem-estar dos moradores.</p>
       </div>
       <div class="flex flex-col space-y-4 md:space-y-6">
         <span class="material-symbols-outlined text-tertiary text-3xl">eco</span>
-        <h3 class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Naturalismo Moderno</h3>
-        <p class="font-body text-sm leading-relaxed text-on-surface-variant">Integração entre o ambiente construído e o orgânico, criando harmonia entre interior e exterior.</p>
+        <h3 id="valor-titulo-2" class="font-headline text-xs sm:text-sm font-bold tracking-[0.2em] uppercase text-on-surface">Naturalismo Moderno</h3>
+        <p id="valor-texto-2" class="font-body text-sm leading-relaxed text-on-surface-variant">Integração entre o ambiente construído e o orgânico, criando harmonia entre interior e exterior.</p>
       </div>
     </div>
   </section>
@@ -139,11 +140,11 @@
   <section class="pb-16 md:pb-32 px-4 sm:px-8 max-w-screen-2xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end">
       <div class="md:col-span-8 h-64 sm:h-96 md:h-[500px] overflow-hidden">
-        <img alt="Detalhe arquitetônico" class="w-full h-full object-cover grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOjxhx4kJC_RsfB_BVlH_OXWi4NWcMD2ecGqJvfah6ZsI-IHIRiVXg_yHY1utilbfsALYRgZHSYUtI4AXUC6TfwgvlAAnNbQaD-UPtjz0-pE-KMTMJdwof7kk9WFb40m_oMXFxMB7XtcRi9fNImlAUS9Yk1kKlst0SGq4aPwpwFZUSPqCd6zP4CLUDl8Vc8eBX3FeoIzi2ZNU5uO38_9KFNbsEHXxyz_-oIFkjurVOwwZ6MR8ZWaK9m-SaLqzUmnEW_yj5IgywaA"/>
+        <img id="sobre-foto-fundo" alt="Detalhe arquitetônico" class="w-full h-full object-cover grayscale opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEOjxhx4kJC_RsfB_BVlH_OXWi4NWcMD2ecGqJvfah6ZsI-IHIRiVXg_yHY1utilbfsALYRgZHSYUtI4AXUC6TfwgvlAAnNbQaD-UPtjz0-pE-KMTMJdwof7kk9WFb40m_oMXFxMB7XtcRi9fNImlAUS9Yk1kKlst0SGq4aPwpwFZUSPqCd6zP4CLUDl8Vc8eBX3FeoIzi2ZNU5uO38_9KFNbsEHXxyz_-oIFkjurVOwwZ6MR8ZWaK9m-SaLqzUmnEW_yj5IgywaA"/>
       </div>
       <div class="md:col-span-4 bg-surface-container-high p-8 sm:p-12 md:-ml-24 z-10">
-        <h4 class="font-headline text-xl md:text-2xl font-light mb-4 md:mb-6 leading-tight text-on-surface">Onde a estética encontra a função primordial.</h4>
-        <p class="font-body text-sm text-on-surface-variant mb-6 md:mb-8 leading-relaxed">
+        <h4 id="sobre-destaque-titulo" class="font-headline text-xl md:text-2xl font-light mb-4 md:mb-6 leading-tight text-on-surface">Onde a estética encontra a função primordial.</h4>
+        <p id="sobre-destaque-texto" class="font-body text-sm text-on-surface-variant mb-6 md:mb-8 leading-relaxed">
           Projetamos para além do visual. Projetamos para o toque, para o silêncio e para o convívio. Cada linha traçada em nosso estúdio reflete um compromisso com a longevidade arquitetônica.
         </p>
         <a href="projetos.html" class="inline-block bg-primary text-on-primary px-6 sm:px-8 py-4 font-headline text-xs tracking-[0.2em] uppercase hover:bg-primary-dim transition-colors duration-300">
@@ -195,15 +196,96 @@
     }
   });
 
-  fetch('data/content.json')
-    .then(r => r.json())
-    .then(c => {
-      if (c.sobre) {
-        if (c.sobre.foto) document.getElementById('paula-foto').src = c.sobre.foto;
-        if (c.sobre.bio_p1) document.getElementById('bio-p1').textContent = c.sobre.bio_p1;
-        if (c.sobre.bio_p2) document.getElementById('bio-p2').textContent = c.sobre.bio_p2;
+</script>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+  import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+
+  const app = initializeApp({
+    apiKey:            "AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw",
+    authDomain:        "tatagiba-arquitetura.firebaseapp.com",
+    projectId:         "tatagiba-arquitetura",
+    storageBucket:     "tatagiba-arquitetura.firebasestorage.app",
+    messagingSenderId: "649936737333",
+    appId:             "1:649936737333:web:661bae2f86310a8c128d7c",
+  });
+  const db = getFirestore(app);
+
+  try {
+    const snap = await getDoc(doc(db, 'settings', 'content'));
+    const c = snap.data() || {};
+
+    // ── Logo ──────────────────────────────────────────────────────
+    if (c.geral?.logo) {
+      document.getElementById('site-logo-img').src = c.geral.logo;
+      document.getElementById('site-logo-img').classList.remove('hidden');
+      document.getElementById('site-logo-text').classList.add('hidden');
+    }
+
+    // ── Fotos de Paula (slideshow) ────────────────────────────────
+    const fotos = c.sobre?.fotos?.length ? c.sobre.fotos
+                : c.sobre?.foto          ? [c.sobre.foto]
+                : [];
+    if (fotos.length > 0) {
+      const slideshow = document.getElementById('paula-slideshow');
+      const mainImg   = document.getElementById('paula-foto');
+      mainImg.src = fotos[0];
+
+      if (fotos.length > 1) {
+        const imgs = [mainImg, ...fotos.slice(1).map(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = 'Paula Tatagiba, Arquiteta';
+          img.className = 'w-full h-full object-cover absolute inset-0 transition-opacity duration-700 opacity-0';
+          slideshow.appendChild(img);
+          return img;
+        })];
+
+        const dotsWrap = document.createElement('div');
+        dotsWrap.className = 'absolute bottom-3 left-0 right-0 flex justify-center gap-2 z-10';
+        fotos.forEach((_, i) => {
+          const d = document.createElement('button');
+          d.style.cssText = `width:8px;height:8px;border-radius:50%;border:none;cursor:pointer;transition:all .3s;background:${i===0?'rgba(255,255,255,.95)':'rgba(255,255,255,.4)'}`;
+          d.addEventListener('click', () => go(i));
+          dotsWrap.appendChild(d);
+        });
+        slideshow.appendChild(dotsWrap);
+
+        let cur = 0;
+        function go(idx) {
+          imgs[cur].classList.add('opacity-0');
+          dotsWrap.children[cur].style.background = 'rgba(255,255,255,.4)';
+          cur = idx;
+          imgs[cur].classList.remove('opacity-0');
+          dotsWrap.children[cur].style.background = 'rgba(255,255,255,.95)';
+        }
+        setInterval(() => go((cur + 1) % fotos.length), 4000);
       }
+    }
+
+    // ── Bio ───────────────────────────────────────────────────────
+    if (c.sobre?.bio_p1) document.getElementById('bio-p1').textContent = c.sobre.bio_p1;
+    if (c.sobre?.bio_p2) document.getElementById('bio-p2').textContent = c.sobre.bio_p2;
+
+    // ── Valores (3 blocos) ────────────────────────────────────────
+    (c.sobre?.valores || []).forEach((v, i) => {
+      const t = document.getElementById('valor-titulo-' + i);
+      const p = document.getElementById('valor-texto-' + i);
+      if (t && v.titulo) t.textContent = v.titulo;
+      if (p && v.texto)  p.textContent = v.texto;
     });
+
+    // ── Foto de fundo ─────────────────────────────────────────────
+    if (c.sobre?.foto_fundo) document.getElementById('sobre-foto-fundo').src = c.sobre.foto_fundo;
+
+    // ── Destaque ──────────────────────────────────────────────────
+    if (c.sobre?.destaque_titulo) document.getElementById('sobre-destaque-titulo').textContent = c.sobre.destaque_titulo;
+    if (c.sobre?.destaque_texto)  document.getElementById('sobre-destaque-texto').textContent  = c.sobre.destaque_texto;
+
+  } catch (e) {
+    console.warn('Firebase:', e);
+  }
 </script>
 </body>
 </html>
