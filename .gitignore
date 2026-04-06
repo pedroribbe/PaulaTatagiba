@@ -1,3 +1,6 @@
 painel-admin/node_modules/
 painel-admin/dist/
 node_modules
+
+.vercel
+.claude
