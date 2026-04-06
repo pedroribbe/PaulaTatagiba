@@ -4,12 +4,12 @@ import { initializeFirestore, persistentLocalCache, persistentSingleTabManager }
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey:            "AIzaSyBo0HJWT_OMe6SkBIcQ0gmHoym-I8wDpyw",
+  authDomain:        "tatagiba-arquitetura.firebaseapp.com",
+  projectId:         "tatagiba-arquitetura",
+  storageBucket:     "tatagiba-arquitetura.firebasestorage.app",
+  messagingSenderId: "649936737333",
+  appId:             "1:649936737333:web:661bae2f86310a8c128d7c",
 };
 
 export const app     = initializeApp(firebaseConfig);
