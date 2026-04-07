@@ -135,22 +135,33 @@
 
   <!-- Footer -->
   <footer class="bg-[#677064] text-[#faf9f8] border-t border-[#a4a693]/20 py-12 md:py-16 px-4 sm:px-6">
-    <div class="max-w-screen-2xl w-full flex flex-col items-center mx-auto text-center">
-      <div class="text-lg sm:text-2xl font-light tracking-[0.4em] text-white mb-6 md:mb-8 font-headline">TATAGIBA
-        ARQUITETURA</div>
-      <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 md:mb-12">
-        <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300"
-          href="index.html">Home</a>
-        <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300"
-          href="sobre.html">Sobre</a>
-        <a class="font-body tracking-[0.15em] text-xs uppercase text-white font-bold" href="projetos.html">Projetos</a>
-        <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300"
-          href="contato.html">Contato</a>
+    <div class="flex flex-col items-center text-center w-full max-w-screen-xl mx-auto">
+      <div class="text-lg sm:text-2xl font-light tracking-[0.4em] text-white mb-8 md:mb-12 uppercase font-headline">
+        Tatagiba Arquitetura
       </div>
-      <div class="w-24 h-px bg-white/20 mb-6 md:mb-8"></div>
-      <p class="font-body tracking-[0.15em] text-[10px] uppercase text-[#ced7c9] opacity-60">
+      <div class="flex flex-wrap justify-center gap-8 md:gap-12 mb-10 md:mb-16 tracking-[0.15em] text-xs uppercase">
+        <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="index.html">Home</a>
+        <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="sobre.html">Sobre</a>
+        <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="projetos.html">Projetos</a>
+        <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="contato.html">Contato</a>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 w-full text-sm text-[#ced7c9] mb-10 md:mb-16 border-y border-white/10 py-10 md:py-12">
+        <div>
+          <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Localização</h6>
+          <p id="footer-endereco" class="text-sm">Rua Visconde de Pirajá<br/>Ipanema, Rio de Janeiro, RJ</p>
+        </div>
+        <div>
+          <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Contato</h6>
+          <p class="text-sm"><span id="footer-email">contato@tatagiba.arq.br</span><br/><span id="footer-telefone">+55 21 99999-9999</span></p>
+        </div>
+        <div>
+          <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Social</h6>
+          <p id="footer-instagram" class="text-sm">@tatagiba.arquitetura</p>
+        </div>
+      </div>
+      <div class="tracking-[0.15em] text-[10px] uppercase opacity-60">
         © 2025 Tatagiba Arquitetura. Todos os direitos reservados.
-      </p>
+      </div>
     </div>
   </footer>
 
@@ -229,8 +240,18 @@ function hideOverlay() {
     const db = getFirestore(app);
 
     try {
-      const snap = await getDoc(doc(db, 'settings', 'projects'));
+      const [snap, snapC] = await Promise.all([
+        getDoc(doc(db, 'settings', 'projects')),
+        getDoc(doc(db, 'settings', 'content'))
+      ]);
       const data = snap.data() || {};
+      const c = snapC.data() || {};
+      if (c.contato) {
+        if (c.contato.endereco)  document.getElementById('footer-endereco').textContent  = c.contato.endereco;
+        if (c.contato.email)     document.getElementById('footer-email').textContent     = c.contato.email;
+        if (c.contato.telefone)  document.getElementById('footer-telefone').textContent  = c.contato.telefone;
+        if (c.contato.instagram) document.getElementById('footer-instagram').textContent = c.contato.instagram;
+      }
       const projects = data.projects || [];
       const grid = document.getElementById('projects-grid');
 

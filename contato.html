@@ -154,18 +154,35 @@
 </main>
 
 <!-- Footer -->
-<footer class="bg-[#677064] text-[#faf9f8] border-t border-[#a4a693]/20 py-12 md:py-16 px-4 sm:px-6 flex flex-col items-center text-center">
-  <div class="mb-6 md:mb-8 font-headline text-lg sm:text-2xl font-light tracking-[0.4em] text-white uppercase">Tatagiba Arquitetura</div>
-  <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-8 md:mb-12">
-    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="index.html">Home</a>
-    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="sobre.html">Sobre</a>
-    <a class="font-body tracking-[0.15em] text-xs uppercase text-[#ced7c9] hover:text-white transition-all duration-300" href="projetos.html">Projetos</a>
-    <a class="font-body tracking-[0.15em] text-xs uppercase text-white font-bold" href="contato.html">Contato</a>
+<footer class="bg-[#677064] text-[#faf9f8] border-t border-[#a4a693]/20 py-12 md:py-16 px-4 sm:px-6">
+  <div class="flex flex-col items-center text-center w-full max-w-screen-xl mx-auto">
+    <div class="text-lg sm:text-2xl font-light tracking-[0.4em] text-white mb-8 md:mb-12 uppercase font-headline">
+      Tatagiba Arquitetura
+    </div>
+    <div class="flex flex-wrap justify-center gap-8 md:gap-12 mb-10 md:mb-16 tracking-[0.15em] text-xs uppercase">
+      <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="index.html">Home</a>
+      <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="sobre.html">Sobre</a>
+      <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="projetos.html">Projetos</a>
+      <a class="text-[#ced7c9] hover:text-white transition-all duration-300" href="contato.html">Contato</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-12 w-full text-sm text-[#ced7c9] mb-10 md:mb-16 border-y border-white/10 py-10 md:py-12">
+      <div>
+        <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Localização</h6>
+        <p id="footer-endereco" class="text-sm">Rua Visconde de Pirajá<br/>Ipanema, Rio de Janeiro, RJ</p>
+      </div>
+      <div>
+        <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Contato</h6>
+        <p class="text-sm"><span id="footer-email">contato@tatagiba.arq.br</span><br/><span id="footer-telefone">+55 21 99999-9999</span></p>
+      </div>
+      <div>
+        <h6 class="text-white font-bold uppercase tracking-widest mb-3 text-xs">Social</h6>
+        <p id="footer-instagram" class="text-sm">@tatagiba.arquitetura</p>
+      </div>
+    </div>
+    <div class="tracking-[0.15em] text-[10px] uppercase opacity-60">
+      © 2025 Tatagiba Arquitetura. Todos os direitos reservados.
+    </div>
   </div>
-  <div class="w-12 h-px bg-white/20 mb-8 md:mb-12"></div>
-  <p class="font-body tracking-[0.15em] text-[10px] uppercase text-[#faf9f8] opacity-60">
-    © 2025 Tatagiba Arquitetura. Todos os direitos reservados.
-  </p>
 </footer>
 
 <div id="page-overlay" style="position:fixed;inset:0;background:rgba(250,249,248,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:9999;opacity:1;pointer-events:none;transition:opacity 1.2s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;will-change:opacity;">
@@ -263,18 +280,26 @@ function hideOverlay() {
         document.getElementById('bloco-endereco').style.display = 'none';
         document.getElementById('bloco-mapa').style.display = 'none';
       }
-      if (c.contato.endereco) document.getElementById('contato-endereco').textContent = c.contato.endereco;
+      if (c.contato.endereco) {
+        document.getElementById('contato-endereco').textContent = c.contato.endereco;
+        if(document.getElementById('footer-endereco')) document.getElementById('footer-endereco').textContent = c.contato.endereco;
+      }
       if (c.contato.telefone) {
         const el = document.getElementById('contato-telefone');
         el.textContent = c.contato.telefone;
         el.href = 'tel:' + c.contato.telefone.replace(/\D/g, '');
+        if(document.getElementById('footer-telefone')) document.getElementById('footer-telefone').textContent = c.contato.telefone;
       }
       if (c.contato.email) {
         const el = document.getElementById('contato-email');
         el.textContent = c.contato.email;
         el.href = 'mailto:' + c.contato.email;
+        if(document.getElementById('footer-email')) document.getElementById('footer-email').textContent = c.contato.email;
       }
-      if (c.contato.instagram) document.getElementById('contato-instagram').textContent = c.contato.instagram;
+      if (c.contato.instagram) {
+        document.getElementById('contato-instagram').textContent = c.contato.instagram;
+        if(document.getElementById('footer-instagram')) document.getElementById('footer-instagram').textContent = c.contato.instagram;
+      }
     }
   } catch (e) {
     console.warn('Firebase:', e);
