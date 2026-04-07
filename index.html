@@ -93,9 +93,9 @@
 </nav>
 
 <!-- Hero -->
-<section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-on-surface">
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#3a3630]">
   <div class="absolute inset-0 z-0">
-    <img id="hero-img" alt="Tatagiba Arquitetura" class="w-full h-full object-cover opacity-70" src=""/><script>const _c=localStorage.getItem('hero-img');if(_c)document.getElementById('hero-img').src=_c;</script>
+    <img id="hero-img" alt="Tatagiba Arquitetura" class="w-full h-full object-cover opacity-70" src="" fetchpriority="high"/><script>const _c=localStorage.getItem('hero-img');if(_c)document.getElementById('hero-img').src=_c;</script>
     <div class="absolute inset-0 hero-gradient"></div>
   </div>
   <div class="relative z-10 text-center px-4 sm:px-6">
@@ -212,7 +212,13 @@
   </div>
 </footer>
 
-<div id="page-overlay" style="position:fixed;inset:0;background:#faf9f8;z-index:9999;opacity:1;pointer-events:none;transition:opacity 0.45s ease;"></div>
+<div id="page-overlay" style="position:fixed;inset:0;background:rgba(250,249,248,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:9999;opacity:1;pointer-events:none;transition:opacity 1.2s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;will-change:opacity;">
+  <span style="font-family:Manrope,sans-serif;font-weight:300;font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:#2f3333;">Tatagiba Arquitetura</span>
+  <div style="width:24px;height:1px;background:#afb3b2;"></div>
+</div><div style="width:32px;height:1px;background:#A4A693;opacity:.5;"></div>
+  </div>
+</div>
+<style>@keyframes pulse-logo{0%,100%{opacity:1}50%{opacity:.45}}</style>
 
 <script>
   document.getElementById('menu-btn').addEventListener('click', function() {
@@ -220,20 +226,26 @@
   });
 
   const overlay = document.getElementById('page-overlay');
-  requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
-  document.querySelectorAll('a[href]').forEach(link => {
+function hideOverlay() {
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 700);
+  }
+  const _overlayTimeout = setTimeout(hideOverlay, 6000);
+
+  document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('tel') && !href.startsWith('mailto')) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'all';
-        setTimeout(() => { window.location.href = href; }, 420);
-      });
+      e.preventDefault();
+      overlay.style.display = 'flex';
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'all';
+      setTimeout(() => { window.location.href = href; }, 420);
     }
   });
 
-  // Projetos em destaque do JSON
+  // Projetos em destaque
   const featuredLayouts = [
     { cols: 'md:col-span-8', aspect: 'aspect-[16/9]' },
     { cols: 'md:col-span-4', aspect: 'aspect-[16/9] md:aspect-[3/4]' },
@@ -242,15 +254,19 @@
   ];
   const catLabel = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
 
-  function navigateTo(href) {
-    overlay.style.opacity = '1';
-    overlay.style.pointerEvents = 'all';
-    setTimeout(() => { window.location.href = href; }, 420);
-  }
-
 </script>
 
 <script type="module">
+  function waitForImages(imgs) {
+    return Promise.all(imgs.filter(Boolean).filter(img => !img.complete || !img.naturalWidth).map(img =>
+      new Promise(res => {
+        img.addEventListener('load',  res, { once: true });
+        img.addEventListener('error', res, { once: true });
+        setTimeout(res, 12000);
+      })
+    ));
+  }
+
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
   import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
@@ -309,16 +325,25 @@
     function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
     grid.innerHTML = featured.map((p, i) => {
       const l = featuredLayouts[i] || featuredLayouts[0];
-      return `<div class="${l.cols} project-card relative overflow-hidden cursor-pointer ${l.aspect}" onclick="navigateTo('projeto.html?id=${esc(p.id)}')">
+      const _pid = encodeURIComponent(p.id || '');
+      const href = _pid ? `projeto.html?id=${_pid}` : `projeto.html?i=${i}`;
+      return `<a href="${href}" class="${l.cols} project-card relative overflow-hidden block ${l.aspect}">
         <img alt="${esc(p.name)}" class="w-full h-full object-cover transition-transform duration-700" src="${esc(p.image)}"/>
         <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
           <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${esc(catLabel[p.category] || p.category)}</span>
           <h4 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${esc(p.name)}</h4>
         </div>
-      </div>`;
+      </a>`;
     }).join('');
+
+    // ── Espera todas as imagens com src definido carregarem ───────
+    await waitForImages(Array.from(document.querySelectorAll('img[src]:not([src=""])')));
+
   } catch (e) {
     console.warn('Firebase:', e);
+  } finally {
+    clearTimeout(_overlayTimeout);
+    hideOverlay();
   }
 </script>
 </body>

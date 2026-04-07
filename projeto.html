@@ -170,28 +170,10 @@
   <span id="lightbox-counter"></span>
 </div>
 
-<div id="page-overlay" style="position:fixed;inset:0;background:#faf9f8;z-index:9999;opacity:1;pointer-events:none;transition:opacity 0.45s ease;"></div>
-
 <script>
   document.getElementById('menu-btn').addEventListener('click', function() {
     document.getElementById('mobile-menu').classList.toggle('hidden');
   });
-
-  // Page transition
-  const overlay = document.getElementById('page-overlay');
-  requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
-  document.querySelectorAll('a[href]').forEach(link => {
-    const href = link.getAttribute('href');
-    if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('tel') && !href.startsWith('mailto')) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        overlay.style.opacity = '1';
-        overlay.style.pointerEvents = 'all';
-        setTimeout(() => { window.location.href = href; }, 420);
-      });
-    }
-  });
-
 </script>
 
 <script type="module">
@@ -208,95 +190,101 @@
   });
   const db = getFirestore(app);
 
-  const params    = new URLSearchParams(window.location.search);
-  const projectId = params.get('id');
-  const catLabel  = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
+  (async () => {
+    const params     = new URLSearchParams(window.location.search);
+    const projectId  = params.get('id');
+    const projectIdx = params.get('i');
+    const catLabel   = { residencial: 'Residencial', comercial: 'Comercial', infantil: 'Infantil' };
 
-  try {
-    const snap = await getDoc(doc(db, 'settings', 'projects'));
-    const data  = snap.data() || {};
-    const project = (data.projects || []).find(p => p.id === projectId);
-    if (!project) { window.location.href = 'projetos.html'; }
+    try {
+      const snap = await getDoc(doc(db, 'settings', 'projects'));
+      const data  = snap.data() || {};
+      const all   = data.projects || [];
 
-    document.title = `${project.name} | Tatagiba Arquitetura`;
-    document.getElementById('proj-name').textContent     = project.name;
-    document.getElementById('proj-category').textContent = catLabel[project.category] || project.category;
+      let project = all.find(p => p.id && p.id === projectId);
+      if (!project && projectIdx !== null) project = all[parseInt(projectIdx, 10)];
+      if (!project) { window.location.href = 'projetos.html'; return; }
 
-    function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+      document.title = `${project.name} | Tatagiba Arquitetura`;
+      document.getElementById('proj-name').textContent     = project.name;
+      document.getElementById('proj-category').textContent = catLabel[project.category] || project.category;
 
-    const images  = (project.images && project.images.length) ? project.images : [project.image];
-    const gallery = document.getElementById('proj-gallery');
-    let html = '';
+      function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
-    images.forEach((src, i) => {
-      const imgSrc = esc(typeof src === 'object' ? src.src : src);
-      const altTxt = esc(project.name);
-      if (i === 0) {
-        html += `<div class="w-full overflow-hidden" style="max-height:85vh"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" style="max-height:85vh" data-lb="${i}" loading="eager"/></div>`;
-      } else if (i % 2 === 1) {
-        const next    = images[i + 1];
-        const nextSrc = next ? esc(typeof next === 'object' ? next.src : next) : null;
-        if (nextSrc) {
-          html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6" style="height:55vh">
-            <div class="overflow-hidden h-full"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" data-lb="${i}" loading="lazy"/></div>
-            <div class="overflow-hidden h-full"><img src="${nextSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" data-lb="${i+1}" loading="lazy"/></div>
-          </div>`;
-        } else {
-          html += `<div class="w-full overflow-hidden" style="max-height:75vh"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" style="max-height:75vh" data-lb="${i}" loading="lazy"/></div>`;
+      const images  = (project.images && project.images.length) ? project.images : [project.image];
+      const gallery = document.getElementById('proj-gallery');
+      let html = '';
+
+      images.forEach((src, i) => {
+        const imgSrc = esc(typeof src === 'object' ? src.src : src);
+        const altTxt = esc(project.name);
+        if (i === 0) {
+          html += `<div class="w-full overflow-hidden" style="max-height:85vh"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" style="max-height:85vh" data-lb="${i}" loading="eager"/></div>`;
+        } else if (i % 2 === 1) {
+          const next    = images[i + 1];
+          const nextSrc = next ? esc(typeof next === 'object' ? next.src : next) : null;
+          if (nextSrc) {
+            html += `<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6" style="height:55vh">
+              <div class="overflow-hidden h-full"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" data-lb="${i}" loading="lazy"/></div>
+              <div class="overflow-hidden h-full"><img src="${nextSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" data-lb="${i+1}" loading="lazy"/></div>
+            </div>`;
+          } else {
+            html += `<div class="w-full overflow-hidden" style="max-height:75vh"><img src="${imgSrc}" alt="${altTxt}" class="w-full h-full object-cover block lb-trigger" style="max-height:75vh" data-lb="${i}" loading="lazy"/></div>`;
+          }
         }
+      });
+
+      gallery.innerHTML = html;
+
+      // ── Lightbox ──────────────────────────────────────────────────
+      const allSrcs = images.map(s => typeof s === 'object' ? s.src : s);
+      const lb      = document.getElementById('lightbox');
+      const lbImg   = document.getElementById('lightbox-img');
+      const lbCnt   = document.getElementById('lightbox-counter');
+      let cur = 0;
+
+      function lbOpen(idx) {
+        cur = idx;
+        lbImg.src = allSrcs[cur];
+        lbCnt.textContent = `${cur + 1} / ${allSrcs.length}`;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
       }
-    });
+      function lbClose() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      function lbGo(dir) {
+        cur = (cur + dir + allSrcs.length) % allSrcs.length;
+        lbImg.src = allSrcs[cur];
+        lbCnt.textContent = `${cur + 1} / ${allSrcs.length}`;
+      }
 
-    gallery.innerHTML = html;
+      gallery.querySelectorAll('.lb-trigger').forEach(img => {
+        img.addEventListener('click', () => lbOpen(+img.dataset.lb));
+      });
+      document.getElementById('lightbox-close').addEventListener('click', lbClose);
+      document.getElementById('lightbox-prev').addEventListener('click', () => lbGo(-1));
+      document.getElementById('lightbox-next').addEventListener('click', () => lbGo(1));
+      lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
+      document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')     lbClose();
+        if (e.key === 'ArrowLeft')  lbGo(-1);
+        if (e.key === 'ArrowRight') lbGo(1);
+      });
 
-    // ── Lightbox ──────────────────────────────────────────────────
-    const allSrcs = images.map(s => typeof s === 'object' ? s.src : s);
-    const lb      = document.getElementById('lightbox');
-    const lbImg   = document.getElementById('lightbox-img');
-    const lbCnt   = document.getElementById('lightbox-counter');
-    let cur = 0;
-
-    function lbOpen(idx) {
-      cur = idx;
-      lbImg.src = allSrcs[cur];
-      lbCnt.textContent = `${cur + 1} / ${allSrcs.length}`;
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      // Swipe mobile
+      let touchStartX = 0;
+      lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) lbGo(diff > 0 ? 1 : -1);
+      });
+    } catch (e) {
+      console.warn('Firebase:', e);
     }
-    function lbClose() {
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function lbGo(dir) {
-      cur = (cur + dir + allSrcs.length) % allSrcs.length;
-      lbImg.src = allSrcs[cur];
-      lbCnt.textContent = `${cur + 1} / ${allSrcs.length}`;
-    }
-
-    gallery.querySelectorAll('.lb-trigger').forEach(img => {
-      img.addEventListener('click', () => lbOpen(+img.dataset.lb));
-    });
-    document.getElementById('lightbox-close').addEventListener('click', lbClose);
-    document.getElementById('lightbox-prev').addEventListener('click', () => lbGo(-1));
-    document.getElementById('lightbox-next').addEventListener('click', () => lbGo(1));
-    lb.addEventListener('click', e => { if (e.target === lb) lbClose(); });
-    document.addEventListener('keydown', e => {
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape')     lbClose();
-      if (e.key === 'ArrowLeft')  lbGo(-1);
-      if (e.key === 'ArrowRight') lbGo(1);
-    });
-
-    // Swipe mobile
-    let touchStartX = 0;
-    lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    lb.addEventListener('touchend', e => {
-      const diff = touchStartX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) lbGo(diff > 0 ? 1 : -1);
-    });
-  } catch (e) {
-    console.warn('Firebase:', e);
-  }
+  })();
 </script>
 </body>
 </html>

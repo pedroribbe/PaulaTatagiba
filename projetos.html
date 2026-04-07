@@ -154,27 +154,36 @@
     </div>
   </footer>
 
-  <div id="page-overlay"
-    style="position:fixed;inset:0;background:#faf9f8;z-index:9999;opacity:1;pointer-events:none;transition:opacity 0.45s ease;">
+  <div id="page-overlay" style="position:fixed;inset:0;background:rgba(250,249,248,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:9999;opacity:1;pointer-events:none;transition:opacity 1.2s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;will-change:opacity;">
+  <span style="font-family:Manrope,sans-serif;font-weight:300;font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:#2f3333;">Tatagiba Arquitetura</span>
+  <div style="width:24px;height:1px;background:#afb3b2;"></div>
+</div><div style="width:32px;height:1px;background:#A4A693;opacity:.5;"></div>
+    </div>
   </div>
+  <style>@keyframes pulse-logo{0%,100%{opacity:1}50%{opacity:.45}}</style>
 
   <script>
     document.getElementById('menu-btn').addEventListener('click', function () {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
-    // Page transition
     const overlay = document.getElementById('page-overlay');
-    requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
-    document.querySelectorAll('a[href]').forEach(link => {
+function hideOverlay() {
+      overlay.style.opacity = '0';
+      setTimeout(() => { overlay.style.display = 'none'; }, 700);
+    }
+    const _overlayTimeout = setTimeout(hideOverlay, 6000);
+
+    document.addEventListener('click', function (e) {
+      const link = e.target.closest('a[href]');
+      if (!link) return;
       const href = link.getAttribute('href');
       if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('tel') && !href.startsWith('mailto')) {
-        link.addEventListener('click', function (e) {
-          e.preventDefault();
-          overlay.style.opacity = '1';
-          overlay.style.pointerEvents = 'all';
-          setTimeout(() => { window.location.href = href; }, 420);
-        });
+        e.preventDefault();
+        overlay.style.display = 'flex';
+        overlay.style.opacity = '1';
+        overlay.style.pointerEvents = 'all';
+        setTimeout(() => { window.location.href = href; }, 420);
       }
     });
 
@@ -201,22 +210,7 @@
       return i < layouts.length ? layouts[i] : extraLayouts[(i - layouts.length) % extraLayouts.length];
     }
 
-    function navigateTo(href) {
-      overlay.style.opacity = '1';
-      overlay.style.pointerEvents = 'all';
-      setTimeout(() => { window.location.href = href; }, 420);
-    }
 
-    function buildCard(p, i) {
-      const l = getLayout(i);
-      return `<div class="${l.cols} ${l.extra} project-card relative cursor-pointer overflow-hidden ${l.aspect}" data-category="${p.category}" onclick="navigateTo('projeto.html?id=${p.id}')">
-      <img alt="${p.name}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="${p.image}"/>
-      <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
-        <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${catLabel[p.category] || p.category}</span>
-        <h3 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${p.name}</h3>
-      </div>
-    </div>`;
-    }
 
   </script>
 
@@ -265,16 +259,27 @@
       function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
       function buildCard(p, i) {
         const l = getLayout(i);
-        return `<div class="${l.cols} ${l.extra} project-card relative cursor-pointer overflow-hidden ${l.aspect}" data-category="${esc(p.category)}" onclick="navigateTo('projeto.html?id=${esc(p.id)}')">
+        const pid = encodeURIComponent(p.id || '');
+        const href = pid ? `projeto.html?id=${pid}` : `projeto.html?i=${i}`;
+        return `<a href="${href}" class="${l.cols} ${l.extra} project-card relative overflow-hidden ${l.aspect}" data-category="${esc(p.category)}">
           <img alt="${esc(p.name)}" class="w-full h-full object-cover transition-transform duration-700 hover:scale-105" src="${esc(p.image)}"/>
           <div class="project-overlay absolute inset-0 bg-[#D2C2AC]/50 opacity-0 transition-opacity duration-500 flex flex-col items-center justify-center text-center p-4 sm:p-8 backdrop-blur-[2px]">
             <span class="font-body font-light text-xs tracking-[0.3em] uppercase text-on-surface mb-2">${esc(catLabel[p.category] || p.category)}</span>
             <h3 class="font-headline font-bold text-xl sm:text-2xl tracking-wide text-on-surface uppercase">${esc(p.name)}</h3>
           </div>
-        </div>`;
+        </a>`;
       }
 
       grid.innerHTML = projects.map((p, i) => buildCard(p, i)).join('');
+
+      // Espera todas as imagens do grid carregarem
+      await Promise.all(Array.from(grid.querySelectorAll('img')).filter(img => !img.complete || !img.naturalWidth).map(img =>
+        new Promise(res => {
+          img.addEventListener('load',  res, { once: true });
+          img.addEventListener('error', res, { once: true });
+          setTimeout(res, 12000);
+        })
+      ));
 
       const filterBtns = document.querySelectorAll('.filter-btn');
       let cards = Array.from(grid.querySelectorAll('[data-category]'));
@@ -322,6 +327,9 @@
       });
     } catch (e) {
       console.warn('Firebase:', e);
+    } finally {
+      clearTimeout(_overlayTimeout);
+      hideOverlay();
     }
   </script>
 </body>
