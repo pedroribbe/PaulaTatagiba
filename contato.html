@@ -80,7 +80,7 @@
   <!-- Hero -->
   <section class="max-w-screen-2xl mx-auto px-4 sm:px-8 pt-16 md:pt-24 pb-8 md:pb-12">
     <h1 class="font-headline font-extrabold text-4xl sm:text-5xl md:text-7xl lg:text-8xl tracking-tight text-on-surface mb-4 leading-none">
-      VAMOS CRIAR <br/>ALGO JUNTOS.
+      CONTATO
     </h1>
     <div class="w-24 h-px bg-on-surface-variant opacity-30 mt-6 md:mt-8"></div>
   </section>
@@ -111,31 +111,36 @@
         </div>
       </div>
 
-      <div class="hidden lg:block relative aspect-square w-full max-w-sm overflow-hidden">
-        <img alt="Detalhe arquitetônico" class="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXDHbfVQFZWrmwfBR19BlN7qfIems63kHCOlorpEON3WQuxHL-52zReO-PKGG73wk78nyh86fFGHExO0Q9D7zOPcB4P5yHMeYvWNtuln2Qw08od52OlS78elmztPMF69JWsBk2h8UYYYELoA18pYTGzck9Azs3I_xK48VzwK8twYEQu0fS0YYESMabgFhSnUhWa9B_7m5r5z9j6JJnXalUy1NRBaZSEzgFg-FrNW_S_sqEl5040O1BcsmzkM2O9t3Ip7FIIsNnshw"/>
-        <div class="absolute inset-0 border border-white/10 pointer-events-none"></div>
-      </div>
     </div>
 
     <!-- Formulário -->
     <div class="lg:col-span-7">
-      <form action="#" class="space-y-10 md:space-y-12">
+      <form id="contact-form" action="https://formspree.io/f/mjgplnwp" method="POST" class="space-y-10 md:space-y-12">
+        <input type="hidden" name="_subject" id="form-subject"/>
+        <input type="hidden" name="_cc" id="form-cc"/>
+        <input type="hidden" name="_next" value=""/>
+        <input type="hidden" name="_language" value="pt"/>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 md:gap-12">
           <div class="relative">
             <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">Nome</label>
-            <input class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300" placeholder="Seu nome completo" type="text"/>
+            <input id="form-name" name="from_name" class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300" placeholder="Seu nome completo" type="text" required/>
           </div>
           <div class="relative">
-            <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">E-mail</label>
-            <input class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300" placeholder="seu@email.com" type="email"/>
+            <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">Celular</label>
+            <input id="form-phone" name="phone" class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300" placeholder="+55 21 99999-9999" type="tel" required/>
           </div>
         </div>
         <div class="relative">
-          <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">Mensagem</label>
-          <textarea class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300 resize-none" placeholder="Conte-nos sobre seu projeto..." rows="4"></textarea>
+          <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">E-mail</label>
+          <input id="form-email" name="from_email" class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300" placeholder="seu@email.com" type="email" required/>
         </div>
+        <div class="relative">
+          <label class="font-label text-[10px] tracking-[0.25em] uppercase text-on-surface-variant mb-2 block">Mensagem</label>
+          <textarea id="form-message" name="message" class="w-full bg-transparent border-t-0 border-l-0 border-r-0 border-b border-outline-variant py-3 md:py-4 px-0 font-body text-base md:text-lg border-focus-color placeholder:text-on-surface-variant/40 transition-all duration-300 resize-none" placeholder="Conte-nos sobre seu projeto..." rows="4" required></textarea>
+        </div>
+        <div id="form-feedback" class="hidden text-sm font-body tracking-wide"></div>
         <div class="pt-4 md:pt-8">
-          <button class="group relative inline-flex items-center justify-between px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dim text-on-primary w-full sm:w-auto transition-all duration-500 overflow-hidden" type="submit">
+          <button id="form-submit" class="group relative inline-flex items-center justify-between px-8 sm:px-10 py-4 sm:py-5 bg-primary hover:bg-primary-dim text-on-primary w-full sm:w-auto transition-all duration-500 overflow-hidden" type="submit">
             <span class="relative z-10 font-label font-medium tracking-[0.2em] uppercase text-xs sm:text-sm">Enviar</span>
             <span class="material-symbols-outlined ml-4 relative z-10 transition-transform duration-300 group-hover:translate-x-2">arrow_right_alt</span>
             <div class="absolute inset-0 bg-tertiary translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
@@ -143,9 +148,6 @@
         </div>
       </form>
 
-      <div id="bloco-mapa" class="mt-16 md:mt-24 grayscale brightness-90 hover:grayscale-0 transition-all duration-1000 overflow-hidden">
-        <img alt="Mapa de localização" class="w-full h-56 sm:h-80 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLL2_9s9M_Sm1mkLKpMcoH0vQwkiAfDfW3JXTosFyZz8J0H3g0qhoCEcnryoPIHVB08xII71mMefo5-z04I22ibJ6gBp_Xe6TIodaZvuBg0MOU4SUZlYEuopYOvtJpQp6_DS5-8_Frg81pweOT2DmcOpy8WwxG8yDBVToL4ETMEz4fkeloP5acRvwHfpK73gR4gTHcctR_bQ4RdrvNZUB2qPMEMjYnySu-ZhzVcKxkx_Xm_MsdlFwrLNwuS56b0oopyuA8hU0MeIE"/>
-      </div>
     </div>
 
   </section>
@@ -166,7 +168,13 @@
   </p>
 </footer>
 
-<div id="page-overlay" style="position:fixed;inset:0;background:#faf9f8;z-index:9999;opacity:1;pointer-events:none;transition:opacity 0.45s ease;"></div>
+<div id="page-overlay" style="position:fixed;inset:0;background:rgba(250,249,248,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:9999;opacity:1;pointer-events:none;transition:opacity 1.2s ease;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;will-change:opacity;">
+  <span style="font-family:Manrope,sans-serif;font-weight:300;font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:#2f3333;">Tatagiba Arquitetura</span>
+  <div style="width:24px;height:1px;background:#afb3b2;"></div>
+</div><div style="width:32px;height:1px;background:#A4A693;opacity:.5;"></div>
+  </div>
+</div>
+<style>@keyframes pulse-logo{0%,100%{opacity:1}50%{opacity:.45}}</style>
 
 <script>
   document.getElementById('menu-btn').addEventListener('click', function() {
@@ -174,19 +182,63 @@
   });
 
   const overlay = document.getElementById('page-overlay');
-  requestAnimationFrame(() => requestAnimationFrame(() => { overlay.style.opacity = '0'; }));
+function hideOverlay() {
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 700);
+  }
+  const _overlayTimeout = setTimeout(hideOverlay, 6000);
+
   document.querySelectorAll('a[href]').forEach(link => {
     const href = link.getAttribute('href');
     if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('tel') && !href.startsWith('mailto')) {
       link.addEventListener('click', function(e) {
         e.preventDefault();
+        overlay.style.display = 'flex';
         overlay.style.opacity = '1';
         overlay.style.pointerEvents = 'all';
         setTimeout(() => { window.location.href = href; }, 420);
       });
     }
   });
+</script>
 
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn      = document.getElementById('form-submit');
+    const feedback = document.getElementById('form-feedback');
+    const name     = document.getElementById('form-name').value.trim();
+    const email    = document.getElementById('form-email').value.trim();
+
+    // preenche campos ocultos antes de enviar
+    document.getElementById('form-subject').value = 'Novo contato - ' + name;
+    document.getElementById('form-cc').value       = email;
+
+    btn.disabled = true;
+    btn.querySelector('span.font-label').textContent = 'Enviando…';
+    feedback.className = 'hidden text-sm font-body tracking-wide';
+
+    try {
+      const res = await fetch(this.action, {
+        method:  'POST',
+        body:    new FormData(this),
+        headers: { 'Accept': 'application/json' },
+      });
+      if (res.ok) {
+        feedback.textContent = 'Mensagem enviada! Entraremos em contato em breve.';
+        feedback.className   = 'text-sm font-body tracking-wide text-primary';
+        this.reset();
+      } else {
+        throw new Error('server');
+      }
+    } catch {
+      feedback.textContent = 'Erro ao enviar. Por favor, tente novamente ou nos contacte diretamente.';
+      feedback.className   = 'text-sm font-body tracking-wide text-tertiary';
+    } finally {
+      btn.disabled = false;
+      btn.querySelector('span.font-label').textContent = 'Enviar';
+    }
+  });
 </script>
 
 <script type="module">
@@ -226,6 +278,9 @@
     }
   } catch (e) {
     console.warn('Firebase:', e);
+  } finally {
+    clearTimeout(_overlayTimeout);
+    hideOverlay();
   }
 </script>
 </body>
