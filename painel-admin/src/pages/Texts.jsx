@@ -9,7 +9,6 @@ const DEFAULT = {
   },
   home: {
     foto_capa: '',
-    manifesto_titulo: '',
     manifesto_texto: '',
     foto_atelier: '',
     expertise: [
@@ -21,13 +20,6 @@ const DEFAULT = {
   sobre: {
     fotos: [],
     foto_fundo: '',
-    valores: [
-      { titulo: 'Curadoria Técnica', texto: '' },
-      { titulo: 'Luz como Estrutura', texto: '' },
-      { titulo: 'Naturalismo Moderno', texto: '' },
-    ],
-    destaque_titulo: '',
-    destaque_texto: '',
     bio_p1: '',
     bio_p2: '',
   },
@@ -71,7 +63,7 @@ export default function Texts() {
         ...data,
         geral:   { ...DEFAULT.geral,   ...(data.geral   || {}) },
         home:    { ...DEFAULT.home,    ...(data.home    || {}), expertise: data.home?.expertise  || DEFAULT.home.expertise },
-        sobre:   { ...DEFAULT.sobre,   ...(data.sobre   || {}), fotos, valores: data.sobre?.valores || DEFAULT.sobre.valores },
+        sobre:   { ...DEFAULT.sobre,   ...(data.sobre   || {}), fotos },
         contato: { ...DEFAULT.contato, ...(data.contato || {}) },
       });
       setSha(sha);
@@ -91,14 +83,6 @@ export default function Texts() {
       const expertise = [...c.home.expertise];
       expertise[idx] = { ...expertise[idx], [field]: value };
       return { ...c, home: { ...c.home, expertise } };
-    });
-  }
-
-  function setValor(idx, field, value) {
-    setContent(c => {
-      const valores = [...(c.sobre.valores || [])];
-      valores[idx] = { ...valores[idx], [field]: value };
-      return { ...c, sobre: { ...c.sobre, valores } };
     });
   }
 
@@ -281,7 +265,7 @@ export default function Texts() {
           <div className="section-group">
             <p className="section-title">Foto de Fundo</p>
             <p style={{ fontSize: '.78rem', color: 'var(--text-3)', marginBottom: '.5rem' }}>
-              Foto em preto e branco na seção inferior da página Sobre.
+              Foto em cor na seção inferior da página Sobre.
             </p>
             <div className="field">
               <div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
@@ -305,41 +289,6 @@ export default function Texts() {
             </div>
           </div>
 
-          {/* Valores */}
-          <div className="section-group">
-            <p className="section-title">Valores (3 blocos)</p>
-            {(content.sobre.valores || []).map((item, i) => (
-              <div key={i} className="card" style={{ display: 'flex', flexDirection: 'column', gap: '.85rem', marginBottom: '.75rem' }}>
-                <p style={{ fontSize: '.72rem', fontWeight: 700, letterSpacing: '.08em', textTransform: 'uppercase', color: 'var(--accent)' }}>
-                  {['Curadoria Técnica', 'Luz como Estrutura', 'Naturalismo Moderno'][i] || `Bloco ${i + 1}`}
-                </p>
-                <div className="field">
-                  <label>Título</label>
-                  <input value={item.titulo} onChange={e => setValor(i, 'titulo', e.target.value)} />
-                </div>
-                <div className="field">
-                  <label>Descrição</label>
-                  <textarea rows={2} value={item.texto} onChange={e => setValor(i, 'texto', e.target.value)} />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Destaque */}
-          <div className="section-group">
-            <p className="section-title">Destaque</p>
-            <p style={{ fontSize: '.78rem', color: 'var(--text-3)', marginBottom: '.5rem' }}>
-              Bloco de texto ao lado da foto de fundo ("Onde a estética encontra...").
-            </p>
-            <div className="field">
-              <label>Título</label>
-              <textarea rows={2} value={content.sobre.destaque_titulo} onChange={e => set('sobre', 'destaque_titulo', e.target.value)} />
-            </div>
-            <div className="field">
-              <label>Texto</label>
-              <textarea rows={3} value={content.sobre.destaque_texto} onChange={e => set('sobre', 'destaque_texto', e.target.value)} />
-            </div>
-          </div>
         </>
       )}
 
@@ -380,11 +329,7 @@ export default function Texts() {
           </div>
           <div className="divider" />
           <div className="field">
-            <label>Título do Manifesto</label>
-            <textarea rows={2} value={content.home.manifesto_titulo} onChange={e => set('home', 'manifesto_titulo', e.target.value)} />
-          </div>
-          <div className="field">
-            <label>Texto</label>
+            <label>Texto do Manifesto</label>
             <textarea rows={3} value={content.home.manifesto_texto} onChange={e => set('home', 'manifesto_texto', e.target.value)} />
           </div>
           <div className="divider" />
